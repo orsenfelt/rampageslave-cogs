@@ -36,11 +36,11 @@ class EQEcho(commands.Cog):
     def _loop_echo(self, ctx):
         ## echo new lines every 3 seconds
         while True:
-            self._send_echo(self, ctx, int(self.channel))
+            self._send_echo(self, ctx, self.channel)
             asyncio.sleep(3)
 
 
     @commands.command(name="test", brief="Just Testing")
     async def test(self, ctx):
-        self._send_echo(self,ctx,int(self.channel))
+        self._send_echo(self,ctx,self.channel)
             
