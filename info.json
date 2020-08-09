@@ -1,6 +1,6 @@
 {
-	"AUTHOR": "Also",
-	"INSTALL_MSG": "Ta!",
+	"author": "Also",
+	"install_msg": "Ta!",
 	"NAME": "Rampage Slave",
 	"SHORT": "Cogs for Rampage Slave Bot, by Also (Orsenfelt)",
 	"DESCRIPTION": "Cogs for Pantheon101, by Also (Orsenfelt)"
