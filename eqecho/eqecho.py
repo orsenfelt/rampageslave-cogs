@@ -25,11 +25,9 @@ class EQEcho(commands.Cog):
         channel = self.bot.get_channel(int(self.channel))
         now = str(time.time_ns())
         now = int(now[:-9])
-        print("#################")
-        print(now)
         five_ago = str(now - (60 * 5))
+        print("#################")
         print("Only getting echoes newer than " + five_ago)
-        print(sql)
 
         self.cursor.execute("SELECT uid,line FROM echo WHERE echoed='0' AND epoch>'" + five_ago + "' ORDER BY epoch ASC")
         data = self.cursor.fetchall()
@@ -43,6 +41,9 @@ class EQEcho(commands.Cog):
                 await channel.send(line[1])
             except:
                 self.db.rollback()
+
+        return True
+
 
     async def _loop_echo(self):
         while True:
