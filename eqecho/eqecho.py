@@ -48,4 +48,4 @@ class EQEcho(commands.Cog):
         if channel:
             return await channel.send("Hello World")
         else:
-            retun awai ctx.send("Borked")
+            return await ctx.send("Borked")
