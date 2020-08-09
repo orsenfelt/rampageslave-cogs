@@ -22,7 +22,10 @@ class EQEcho(commands.Cog):
 
     async def _send_echo(self):
         channel = self.bot.get_channel(int(self.channel))
-        now = mktime(time.gmtime())
+        now = time.time_ns()
+        print("#################")
+        print(now)
+        print("################")
         five_ago = now - (60 * 5)
         print("Only getting echoes newer than " + five_ago)
         sql = "SELECT uid,line FROM echo WHERE echoed='0' AND epoch>'" + five_ago + "' ORDER BY epoch ASC"
