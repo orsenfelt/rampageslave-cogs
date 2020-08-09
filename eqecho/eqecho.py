@@ -26,7 +26,7 @@ class EQEcho(commands.Cog):
             try:
                 self.cursor.execute(sql)
                 self.db.commit()
-                await channel.send(line[1])
+                channel.send(line[1])
             except:
                 self.db.rollback()
 
@@ -34,8 +34,8 @@ class EQEcho(commands.Cog):
     def loop_echo(self, ctx):
         ## echo new lines every 3 seconds
         while True:
-            await self.send_echo(self, ctx, int(self.channel))
-            await asyncio.sleep(3)
+            self.send_echo(self, ctx, int(self.channel))
+            asyncio.sleep(3)
 
 
     @commands.command(name="test", brief="Just Testing")
