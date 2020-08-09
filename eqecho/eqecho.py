@@ -17,7 +17,8 @@ class EQEcho(commands.Cog):
 
     def _get_lines(self):
         self.cursor.execute("SELECT uid,line FROM echo WHERE echoed='0' ORDER BY epoch ASC LIMIT 2")
-        return self.cursor.fetchall()
+        data = self.cursor.fetchall()
+        return data
         
         
 
