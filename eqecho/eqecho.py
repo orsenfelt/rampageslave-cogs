@@ -14,8 +14,6 @@ class EQEcho(commands.Cog):
         self.channel = "740650365078339667"
         self.db = pymysql.connect("localhost","rampage","6gxby3An5oYA2cP0S5JR80^X&","rampage" )
         self.cursor = self.db.cursor()
-        self.bot = bot
-        self.task = loop.create_task(self._loop_echo())
         
 
     async def _send_echo(self, ctx, channel):
