@@ -19,8 +19,9 @@ class EQEcho(commands.Cog):
     @commands.command(name="test", brief="Just Testing")
     async def test(self, ctx):
         
-        self.cursor.execute("SELECT * FROM echo WHERE echoed='0' ORDER BY epoch DESC LIMIT 2")
+        self.cursor.execute("SELECT uid,line FROM echo WHERE echoed='0' ORDER BY epoch LIMIT 5")
         data = self.cursor.fetchone()
-        
         author = ctx.author
-        await author.send(data)
+
+        for line in data:
+            await author.send(line[1])
