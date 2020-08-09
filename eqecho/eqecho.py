@@ -29,4 +29,4 @@ class EQEcho(commands.Cog):
         async with aiohttp.ClientSession(headers=headers) as session:
             joke = await fetch_url(session, "https://icanhazdadjoke.com/")
 
-        await ctx.maybe_send_embed(joke["joke"]
+        await ctx.maybe_send_embed(joke["joke"])
