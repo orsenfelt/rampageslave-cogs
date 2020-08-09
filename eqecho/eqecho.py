@@ -44,20 +44,7 @@ class EQEcho(commands.Cog):
 
     @commands.command(name="test", brief="Just Testing")
     async def test(self, ctx):
-        
-        self.cursor.execute("SELECT uid,line FROM echo WHERE echoed='0' ORDER BY epoch ASC LIMIT 5")
-        data = self.cursor.fetchall()
-        author = ctx.author
-        channel = config.channel_from_id(self.channel)
+        author = ctx.author()
+        await author.send(self)
 
-        for line in data:
-
-            ## Update this line to echoed
-            sql = "UPDATE echo SET echoed='1' WHERE uid='" + line[0] + "'"
-            try:
-                self.cursor.execute(sql)
-                self.db.commit()
-                await channel.send(line[1])
-            except:
-                self.db.rollback()
             
