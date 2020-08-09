@@ -15,7 +15,7 @@ class EQEcho(commands.Cog):
         self.db = pymysql.connect("localhost","rampage","6gxby3An5oYA2cP0S5JR80^X&","rampage" )
         self.cursor = self.db.cursor()
 
-    async def _send_echo(self, ctx, channel: discord.TextChannel = self.channel):
+    async def _send_echo(self, ctx, channel: discord.TextChannel = 740650365078339667):
         
         channel.send("Hello World")
 
