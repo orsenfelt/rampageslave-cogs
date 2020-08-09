@@ -13,7 +13,7 @@ class EQEcho(commands.Cog):
     def __init__(self):
         self.serverid = "740650364575023127"
         self.channelid = "740650365078339667"
-        self.db = pymysql.connect("localhost","testuser","test123","TESTDB" )
+        self.db = pymysql.connect("localhost","rampage","6gxby3An5oYA2cP0S5JR80^X&","rampage" )
 
     @commands.command(name="test", brief="Just Testing")
     async def test(self, ctx):
