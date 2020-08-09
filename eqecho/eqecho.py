@@ -12,7 +12,7 @@ class EQEcho(commands.Cog):
 
     def __init__(self):
         self.server = "740650364575023127"
-        self.channel = "740650365078339667"
+        self.channel = "740650364575023127"
         self.db = pymysql.connect("localhost","rampage","6gxby3An5oYA2cP0S5JR80^X&","rampage" )
         self.cursor = self.db.cursor()
   
@@ -25,6 +25,7 @@ class EQEcho(commands.Cog):
 
         channel = self.channel
         for line in data:
+            print(line[1])
             await channel.send(line[1])
 
 
