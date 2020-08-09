@@ -27,7 +27,7 @@ class EQEcho(commands.Cog):
         print("#################")
         print(now)
         print("################")
-        five_ago = now - (60 * 5)
+        five_ago = str(now - (60 * 5))
         print("Only getting echoes newer than " + five_ago)
         sql = "SELECT uid,line FROM echo WHERE echoed='0' AND epoch>'" + five_ago + "' ORDER BY epoch ASC"
         print(sql)
