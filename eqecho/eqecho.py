@@ -16,11 +16,10 @@ class EQEcho(commands.Cog):
         self.cursor = self.db.cursor()
         self.bot = bot
         self.restart = True
-        self.loop = self.bot.loop.create_task(self._loop_echo(ctx))
+        self.loop = self.bot.loop.create_task(self._loop_echo())
         
 
-    async def _send_echo(self, ctx, channel):
-        channel = ctx.bot.get_channel(int(channel))
+    async def _send_echo(self, channel):
         self.cursor.execute("SELECT uid,line FROM echo WHERE echoed='0' ORDER BY epoch ASC LIMIT 2")
         data = self.cursor.fetchall()
 
@@ -40,6 +39,7 @@ class EQEcho(commands.Cog):
 
     @commands.command(name="test", brief="Just Testing")
     async def test(self, ctx):
-        await self._send_echo(ctx,self.channel)
+        channel = ctx.bot.get_channel(int(self.channel))
+        await self._send_echo(channel)
 
 
