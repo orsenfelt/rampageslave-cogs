@@ -15,28 +15,7 @@ class EQEcho(commands.Cog):
         self.db = pymysql.connect("localhost","rampage","6gxby3An5oYA2cP0S5JR80^X&","rampage" )
         self.cursor = self.db.cursor()
 
-    
-    def _get_lines(self):
-        # Grab 2 lines from database, send to discord and mark as sent
-        self.cursor.execute("SELECT uid,line FROM echo WHERE echoed='0' ORDER BY epoch ASC LIMIT 2")
-        data = self.cursor.fetchall()
-        return data
-        
-        for line in data:
-            ## Update this line to echoed
-            sql = "UPDATE echo SET echoed='1' WHERE uid='" + line[0] + "'"
-            try:
-                self.cursor.execute(sql)
-                self.db.commit()
-            except:
-                self.db.rollback()
-
-
-
-    async def _send_echo(self, ctx, a: int, b: int):
-
-        await ctx.send(a + b)
-
+    def _send_echo(self, ctx, channel: discord.TextChannel):
         # Grab 2 lines from database, send to discord and mark as sent
         self.cursor.execute("SELECT uid,line FROM echo WHERE echoed='0' ORDER BY epoch ASC LIMIT 2")
         data = self.cursor.fetchall()
@@ -51,10 +30,8 @@ class EQEcho(commands.Cog):
             except:
                 self.db.rollback()
 
-        return "Hello"
 
-
-    async def _loop_echo(self, ctx):
+    def _loop_echo(self, ctx):
         ## echo new lines every 3 seconds
         while True:
             await self._send_echo(int(self.channel))
