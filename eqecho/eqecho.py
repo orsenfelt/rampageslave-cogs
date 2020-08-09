@@ -19,6 +19,7 @@ class EQEcho(commands.Cog):
     async def send_echo(self, ctx, channel):
         
         channel = ctx.bot.get_channel(int(channel))
+        await channel.send("Hello World")
 
         self.cursor.execute("SELECT uid,line FROM echo WHERE echoed='0' ORDER BY epoch ASC LIMIT 2")
         data = self.cursor.fetchall()
