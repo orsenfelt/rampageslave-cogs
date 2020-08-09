@@ -46,6 +46,7 @@ class EQEcho(commands.Cog):
                 await channel.send(line[1])
                 await asyncio.sleep(0.1)
             except:
+                print("fail")
                 self.db.rollback()
 
         return True
