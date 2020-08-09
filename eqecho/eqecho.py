@@ -17,7 +17,7 @@ class EQEcho(commands.Cog):
 
     async def _send_echo(self, ctx, channel: discord.TextChannel):
 
-        await channel.send("Hello World")
+        ctx.send("Part one?")
 
         # Grab 2 lines from database, send to discord and mark as sent
         self.cursor.execute("SELECT uid,line FROM echo WHERE echoed='0' ORDER BY epoch ASC LIMIT 2")
@@ -43,7 +43,7 @@ class EQEcho(commands.Cog):
 
     @commands.command(name="test", brief="Just Testing")
     async def test(self, ctx):
-        await ctx.send("Hello World")
+        await ctx.send("__ SENDING TEST ECHO __")
 
         self._send_echo(ctx, int(self.channel))
             
