@@ -18,31 +18,17 @@ class EQEcho(commands.Cog):
   
 
 
-    async def echo(self,ctx):
-        while True:
-            self.cursor.execute("SELECT uid,line FROM echo WHERE echoed='0' ORDER BY epoch ASC")
-            data = self.cursor.fetchall()
-            channel = ctx.get_channel(740650365078339667)
-            
-            for line in data:
-                await channel.send(line[1])
-
-
-    @commands.command(name="test", brief="Just Testing")
-    async def test(self, ctx):
+    async def send_echo(self):
         
-        self.cursor.execute("SELECT uid,line FROM echo WHERE echoed='0' ORDER BY epoch ASC LIMIT 5")
+        self.cursor.execute("SELECT uid,line FROM echo WHERE echoed='0' ORDER BY epoch ASC LIMIT 2")
         data = self.cursor.fetchall()
-        author = ctx.author
 
+        channel = self.channel
         for line in data:
+            await channel.send(line[1])
 
-            ## Update this line to echoed
-            sql = "UPDATE echo SET echoed='1' WHERE uid='" + line[0] + "'"
-            try:
-                self.cursor.execute(sql)
-                self.db.commit()
-                await ctx.send(line[1])
-            except:
-                self.db.rollback()
-            
+
+    async def loop_echo(self):
+        while True:
+            await self.send_echo()
+            await asyncio.sleep(3)
