@@ -48,7 +48,7 @@ class EQEcho(commands.Cog):
     async def test(self, ctx):
         data = self._get_lines()
         for line in data:
-            channel = self.bot.get_channel(self.channel)
+            channel = self.bot.get_channel(int(self.channel))
             await channel.send(line[1])
 
 
