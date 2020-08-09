@@ -30,7 +30,7 @@ class EQEcho(commands.Cog):
             try:
                 self.cursor.execute(sql)
                 self.db.commit()
-                await author.send(line[1])
+                await ctx.send(line[1])
             except:
                 self.db.rollback()
             
