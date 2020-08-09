@@ -48,6 +48,7 @@ class EQEcho(commands.Cog):
         self.cursor.execute("SELECT uid,line FROM echo WHERE echoed='0' ORDER BY epoch ASC LIMIT 5")
         data = self.cursor.fetchall()
         author = ctx.author
+        channel = ctx.channel(self.channel)
 
         for line in data:
 
@@ -56,7 +57,7 @@ class EQEcho(commands.Cog):
             try:
                 self.cursor.execute(sql)
                 self.db.commit()
-                await ctx.send(line[1])
+                await channel.send(line[1])
             except:
                 self.db.rollback()
             
