@@ -10,7 +10,7 @@ from redbot.core.utils.chat_formatting import box
 
 class EQEcho(commands.Cog):
 
-	def __init__(self):
+    def __init__(self):
         self.serverid = "740650364575023127"
         self.channelid = "740650365078339667"
 
