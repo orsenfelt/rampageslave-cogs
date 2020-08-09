@@ -40,9 +40,7 @@ class EQEcho(commands.Cog):
 
     @commands.command(name="test", brief="Just Testing")
     async def test(self, ctx):
-        lines = self._get_lines()
-        for line in lines:
-            ctx.send(line[1])
+        self._send_echo(ctx,self.channel)
 
 
 
