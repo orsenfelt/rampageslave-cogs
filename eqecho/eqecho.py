@@ -43,7 +43,7 @@ class EQEcho(commands.Cog):
 
     @commands.command(name="test", brief="Just Testing")
     async def test(self, ctx):
-
+        await ctx.send("Hello World")
 
         self._send_echo(ctx, int(self.channel))
             
