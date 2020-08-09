@@ -23,7 +23,7 @@ class EQEcho(commands.Cog):
         
         channel = self.bot.get_channel(int(self.channel))
 
-        self.cursor.execute("SELECT uid,line FROM echo WHERE echoed='0' ORDER BY epoch ASC LIMIT 2")
+        self.cursor.execute("SELECT uid,line FROM echo WHERE echoed='0' ORDER BY epoch ASC LIMIT 10")
         data = self.cursor.fetchall()
 
         for line in data:
@@ -39,6 +39,7 @@ class EQEcho(commands.Cog):
     async def _loop_echo(self):
         while True:
             await self._send_echo()
+            sleep(5)
 
 
     @commands.command(name="test", brief="Just Testing")
