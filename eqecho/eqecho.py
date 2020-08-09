@@ -45,9 +45,10 @@ class EQEcho(commands.Cog):
 
 
     @commands.command(name="test", brief="Just Testing")
-    async def test(self, ctx, channel: discord.TextChannel = "740650365078339667"):
+    async def test(self, ctx):
         data = self._get_lines()
         for line in data:
+            channel = self.bot.get_channel(self.channel)
             await channel.send(line[1])
 
 
