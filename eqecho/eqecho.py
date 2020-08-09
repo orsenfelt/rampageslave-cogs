@@ -24,4 +24,4 @@ class EQEcho(commands.Cog):
         author = ctx.author
 
         for line in data:
-            await author.send(line[1])
+            await author.send(line)
