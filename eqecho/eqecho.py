@@ -11,7 +11,7 @@ from redbot.core.utils.chat_formatting import box
 class EQEcho(commands.Cog):
 
     def __init__(self):
-        self.channel = 740650365078339667
+        self.channel = "740650365078339667"
         self.db = pymysql.connect("localhost","rampage","6gxby3An5oYA2cP0S5JR80^X&","rampage" )
         self.cursor = self.db.cursor()
 
@@ -22,9 +22,9 @@ class EQEcho(commands.Cog):
         
         
 
-    async def send_echo(self, ctx, channel: discord.TextChannel = 740650365078339667):
+    async def send_echo(self, ctx, channel: discord.TextChannel = "740650365078339667"):
         
-        ctx.send("Hello World")
+        
 
         for line in data:
             ## Update this line to echoed
@@ -45,9 +45,9 @@ class EQEcho(commands.Cog):
 
 
     @commands.command(name="test", brief="Just Testing")
-    async def test(self, ctx):
+    async def test(self, ctx, channel: discord.TextChannel = "740650365078339667"):
         data = self._get_lines()
         for line in data:
-            await self.channel.send(line[1])
+            await channel.send(line[1])
 
 
