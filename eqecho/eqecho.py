@@ -13,8 +13,8 @@ class EQEcho(commands.Cog):
     def __init__(self):
         self.config = Config.get_conf(self, identifier="123321123000")
         default_guild = {
-            "server": 740650364575023127
-            "channel": 740650365078339667
+            "server": 740650364575023127,
+            "channel": 740650365078339667,
         }
         self.config.register_guild(**default_guild)
 
