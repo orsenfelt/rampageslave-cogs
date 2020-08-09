@@ -44,10 +44,8 @@ class EQEcho(commands.Cog):
 
     @commands.command(name="test", brief="Just Testing")
     async def test(self, ctx):
-            
-        channel = ctx.get_user(111584658029826048)
-        await channel.send("Hello World")
-
-        await self.bot.say("Hello World")
-
-            
+        
+        server = ctx.message.server
+        user = ctx.message.author
+        member_object = server.get_member(111584658029826048)
+        await member_object.send("Hello World")
