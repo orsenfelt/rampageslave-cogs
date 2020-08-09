@@ -45,5 +45,5 @@ class EQEcho(commands.Cog):
     @commands.command(name="test", brief="Just Testing")
     async def test(self, ctx):
 
-        channel = ctx.bot.get_user(111584658029826048)
+        channel = ctx.bot.get_channel(self.channel)
         await channel.send("Booya")
