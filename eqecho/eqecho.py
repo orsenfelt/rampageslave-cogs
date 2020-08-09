@@ -44,8 +44,7 @@ class EQEcho(commands.Cog):
 
 
     @commands.command(name="test", brief="Just Testing")
-    async def test(self, ctx):
-        channel = discord.utils.get(ctx.bot.get_user(int(self.channel)))
+    async def test(self, ctx, channel: discord.TextChannel):
         if not channel:
             return await ctx.send("Borked")
         else:
