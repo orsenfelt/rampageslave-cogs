@@ -33,7 +33,7 @@ class EQEcho(commands.Cog):
         while True:
             self.cursor.execute("SELECT uid,line FROM echo WHERE echoed='0' ORDER BY epoch ASC")
             data = self.cursor.fetchall()
-            author = 
+
 
     @commands.command(name="test", brief="Just Testing")
     async def test(self, ctx):
