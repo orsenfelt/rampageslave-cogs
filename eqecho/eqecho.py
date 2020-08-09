@@ -20,7 +20,7 @@ class EQEcho(commands.Cog):
     async def test(self, ctx):
         
         self.cursor.execute("SELECT uid,line FROM echo WHERE echoed='0' ORDER BY epoch LIMIT 5")
-        data = self.cursor.fetchone()
+        data = self.cursor.fetchall()
         author = ctx.author
 
         for line in data:
