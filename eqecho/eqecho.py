@@ -45,7 +45,7 @@ class EQEcho(commands.Cog):
     @commands.command(name="test", brief="Just Testing")
     async def test(self, ctx):
         
-        channel = discord.utils.get(client.get_channel(self.channel))
+        channel = discord.utils.get(ctx.bot.get_channel(self.channel))
         await ctx.send(channel)
 
         channel = ctx.bot.channels.get(self.channel)
