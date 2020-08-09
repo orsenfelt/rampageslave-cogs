@@ -11,16 +11,17 @@ from redbot.core.utils.chat_formatting import box
 class EQEcho(commands.Cog):
 
     def __init__(self):
-        self.channel = "740650365078339667"
+        self.channel = 740650365078339667
         self.db = pymysql.connect("localhost","rampage","6gxby3An5oYA2cP0S5JR80^X&","rampage" )
         self.cursor = self.db.cursor()
 
-    async def _send_echo(self, ctx, channel: discord.TextChannel):
+    async def _send_echo(self, ctx, channel: discord.TextChannel = self.channel):
+        
+        channel.send("Hello World")
+
         # Grab 2 lines from database, send to discord and mark as sent
         self.cursor.execute("SELECT uid,line FROM echo WHERE echoed='0' ORDER BY epoch ASC LIMIT 2")
         data = self.cursor.fetchall()
-
-        await channel.send("Hello World")
 
         for line in data:
             ## Update this line to echoed
