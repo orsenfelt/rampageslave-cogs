@@ -46,6 +46,7 @@ class EQEcho(commands.Cog):
     @commands.command(name="test", brief="Just Testing")
     async def test(self, ctx):
         data = self._get_lines
-        print(data)
+        for line in data:
+            print(line[1])
 
 
