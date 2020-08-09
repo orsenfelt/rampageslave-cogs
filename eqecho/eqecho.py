@@ -15,7 +15,7 @@ class EQEcho(commands.Cog):
         self.db = pymysql.connect("localhost","rampage","6gxby3An5oYA2cP0S5JR80^X&","rampage" )
         self.cursor = self.db.cursor()
 
-    async def _send_echo(self, ctx, channel: discord.TextChannel = 740650365078339667):
+    async def send_echo(self, ctx, channel: discord.TextChannel = 740650365078339667):
         
         channel.send("Hello World")
 
@@ -37,13 +37,13 @@ class EQEcho(commands.Cog):
     async def _loop_echo(self, ctx):
         ## echo new lines every 3 seconds
         while True:
-            await self._send_echo(int(self.channel))
+            await self.send_echo(crx)
             asyncio.sleep(3)
 
 
     @commands.command(name="test", brief="Just Testing")
     async def test(self, ctx):
-        await self._send_echo(ctx,self.channel)
+        await self.send_echo(ctx)
 
 
 
