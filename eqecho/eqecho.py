@@ -39,7 +39,6 @@ class EQEcho(commands.Cog):
     async def _loop_echo(self):
         while True:
             await self._send_echo()
-            sleep(2)
 
 
     @commands.command(name="test", brief="Just Testing")
