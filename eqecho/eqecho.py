@@ -45,7 +45,6 @@ class EQEcho(commands.Cog):
     @commands.command(name="test", brief="Just Testing")
     async def test(self, ctx):
         author = ctx.author
-        channel = ctx.get_channel(self.channel)
         await author.send(ctx)
 
             
