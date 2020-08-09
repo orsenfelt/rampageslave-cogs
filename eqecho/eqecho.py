@@ -37,7 +37,7 @@ class EQEcho(commands.Cog):
                 self.db.rollback()
 
     async def _loop_echo(self):
-        self._send_echo()
+        await self._send_echo()
 
 
     @commands.command(name="test", brief="Just Testing")
