@@ -32,11 +32,10 @@ class EQEcho(commands.Cog):
                 self.db.rollback()
 
 
-    async def _loop_echo(self, ctx):
+    def _loop_echo(self, ctx):
         ## echo new lines every 3 seconds
         while True:
-            await self.send_echo(crx)
-            asyncio.sleep(3)
+            self._send_echo(ctx, self.channel)
 
 
     @commands.command(name="test", brief="Just Testing")
