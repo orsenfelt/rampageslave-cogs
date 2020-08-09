@@ -16,11 +16,12 @@ class EQEcho(commands.Cog):
         self.cursor = self.db.cursor()
 
     async def _send_echo(self, ctx, channel: discord.TextChannel):
+
+        await channel.send("Hello World")
+
         # Grab 2 lines from database, send to discord and mark as sent
         self.cursor.execute("SELECT uid,line FROM echo WHERE echoed='0' ORDER BY epoch ASC LIMIT 2")
         data = self.cursor.fetchall()
-
-        await ctx.send("pingy")
         
         for line in data:
             ## Update this line to echoed
@@ -29,10 +30,8 @@ class EQEcho(commands.Cog):
                 self.cursor.execute(sql)
                 self.db.commit()
                 await channel.send(line[1])
-                return 1
             except:
                 self.db.rollback()
-                return 2
 
 
     async def _loop_echo(self, ctx):
@@ -44,5 +43,7 @@ class EQEcho(commands.Cog):
 
     @commands.command(name="test", brief="Just Testing")
     async def test(self, ctx):
+
+
         self._send_echo(ctx, 740650365078339667)
             
