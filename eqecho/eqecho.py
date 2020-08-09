@@ -25,8 +25,8 @@ class EQEcho(commands.Cog):
         channel = self.bot.get_channel(int(self.channel))
         now = str(time.time_ns())
         now = int(now[:-9])
-        five_ago = str(now - (60 * 5))
-        sql = "SELECT uid,line FROM echo WHERE echoed='0' AND epoch>'" + five_ago + "' ORDER BY epoch ASC LIMIT 10"
+        five_ago = str(now - (60 * 10))
+        sql = "SELECT uid,line FROM echo WHERE echoed='0' AND epoch>'" + five_ago + "' ORDER BY id ASC LIMIT 10"
 
         print("#################")
         print(sql)
@@ -43,7 +43,7 @@ class EQEcho(commands.Cog):
             try:
                 self.cursor.execute(sql)
                 self.db.commit()
-                await channel.send(line[1])
+                channel.send(line[1])
                 await asyncio.sleep(0.1)
             except:
                 print("fail")
@@ -55,7 +55,7 @@ class EQEcho(commands.Cog):
     async def _loop_echo(self):
         while True:
             await self._send_echo()
-            await asyncio.sleep(3)
+            await asyncio.sleep(5)
 
 
     @commands.command(name="test", brief="Just Testing")
