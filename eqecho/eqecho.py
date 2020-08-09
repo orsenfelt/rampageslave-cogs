@@ -33,8 +33,9 @@ class EQEcho(commands.Cog):
             except:
                 self.db.rollback()
 
-    def _loop_echo(self, ctx):
-        self._send_echo(ctx, self.channel)
+    def _loop_echo(self):
+        channel = ctx.bot.get_channel(int(self.channel))
+        self._send_echo(channel)
 
 
     @commands.command(name="test", brief="Just Testing")
