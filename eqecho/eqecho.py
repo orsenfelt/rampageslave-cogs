@@ -26,13 +26,18 @@ class EQEcho(commands.Cog):
         now = str(time.time_ns())
         now = int(now[:-9])
         five_ago = str(now - (60 * 5))
-        print("#################")
-        print("Only getting echoes newer than " + five_ago)
+        sql = "SELECT uid,line FROM echo WHERE echoed='0' AND epoch>'" + five_ago + "' ORDER BY epoch ASC LIMIT 10"
 
-        self.cursor.execute("SELECT uid,line FROM echo WHERE echoed='0' AND epoch>'" + five_ago + "' ORDER BY epoch ASC")
+        print("#################")
+        print(sql)
+
+        self.cursor.execute(sql)
         data = self.cursor.fetchall()
 
         for line in data:
+
+            print("[>] " + line[1])
+            
             ## Update this line to echoed
             sql = "UPDATE echo SET echoed='1' WHERE uid='" + line[0] + "'"
             try:
