@@ -19,6 +19,7 @@ class EQEcho(commands.Cog):
         # Grab 2 lines from database, send to discord and mark as sent
         self.cursor.execute("SELECT uid,line FROM echo WHERE echoed='0' ORDER BY epoch ASC LIMIT 2")
         data = self.cursor.fetchall()
+        print(data)
         
         for line in data:
             ## Update this line to echoed
