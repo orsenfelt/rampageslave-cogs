@@ -14,7 +14,8 @@ class EQEcho(commands.Cog):
         self.channel = "740650365078339667"
         self.db = pymysql.connect("localhost","rampage","6gxby3An5oYA2cP0S5JR80^X&","rampage" )
         self.cursor = self.db.cursor()
-        self.loop = ctx.bot.loop.create_task(self._loop_echo(ctx))
+        self.restart = True
+        self._loop_echo.start()
         
 
     async def _send_echo(self, ctx, channel):
@@ -32,11 +33,9 @@ class EQEcho(commands.Cog):
             except:
                 self.db.rollback()
 
-
+    @tasks.loop(second=3.0)
     def _loop_echo(self, ctx):
-        ## echo new lines every 3 seconds
-        while True:
-            self._send_echo(ctx, self.channel)
+        self._send_echo(ctx, self.channel)
 
 
     @commands.command(name="test", brief="Just Testing")
