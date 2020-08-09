@@ -63,7 +63,7 @@ class EQEcho(commands.Cog):
 
     @commands.command(name="test", brief="Just Testing")
     async def test(self, ctx):
-        lines = _get_lines()
+        lines = self._get_lines()
         for line in lines:
             ctx.send(line[1])
 
