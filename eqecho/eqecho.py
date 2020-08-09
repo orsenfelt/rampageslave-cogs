@@ -44,6 +44,7 @@ class EQEcho(commands.Cog):
                 self.cursor.execute(sql)
                 self.db.commit()
                 await channel.send(line[1])
+                await asyncio.sleep(0.1)
             except:
                 self.db.rollback()
 
