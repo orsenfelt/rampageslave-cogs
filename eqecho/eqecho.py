@@ -19,11 +19,10 @@ class EQEcho(commands.Cog):
   
 
 
-    async def send_echo(self, ctx):
+    async def send_echo(self, ctx, channel: discord.TextChannel):
         # Grab 2 lines from database, send to discord and mark as sent
         self.cursor.execute("SELECT uid,line FROM echo WHERE echoed='0' ORDER BY epoch ASC LIMIT 2")
         data = self.cursor.fetchall()
-        channel = ctx.get_user(111584658029826048)
         
         for line in data:
             ## Update this line to echoed
@@ -37,9 +36,12 @@ class EQEcho(commands.Cog):
 
 
     async def loop_echo(self, ctx):
+        
+        channel = self.channel
+            
         ## echo new lines every 3 seconds
         while True:
-            await self.send_echo(self, ctx)
+            await self.send_echo(self, ctx, channel)
             await asyncio.sleep(3)
 
 
