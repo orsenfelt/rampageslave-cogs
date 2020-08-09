@@ -46,7 +46,10 @@ class EQEcho(commands.Cog):
 
 
     @commands.command(name="test", brief="Just Testing")
-    async def test(self, ctx, self.channel: discord.TextChannel):
+    async def test(self, ctx):
+
+        channel = self.channel: discord.TextChannel
+
         if not channel:
             return await ctx.send("Borked")
         else:
