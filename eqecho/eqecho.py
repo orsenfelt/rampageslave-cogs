@@ -4,6 +4,7 @@ import discord
 import json
 import aiohttp
 import time
+import asyncio
 
 ## Redbot imports
 from redbot.core import Config, commands
@@ -26,10 +27,8 @@ class EQEcho(commands.Cog):
         now = int(now[:-9])
         print("#################")
         print(now)
-        print("################")
         five_ago = str(now - (60 * 5))
         print("Only getting echoes newer than " + five_ago)
-        sql = "SELECT uid,line FROM echo WHERE echoed='0' AND epoch>'" + five_ago + "' ORDER BY epoch ASC"
         print(sql)
 
         self.cursor.execute("SELECT uid,line FROM echo WHERE echoed='0' AND epoch>'" + five_ago + "' ORDER BY epoch ASC")
@@ -48,6 +47,7 @@ class EQEcho(commands.Cog):
     async def _loop_echo(self):
         while True:
             await self._send_echo()
+            await asyncio.sleep(3)
 
 
     @commands.command(name="test", brief="Just Testing")
