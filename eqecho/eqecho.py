@@ -17,7 +17,7 @@ class EQEcho(commands.Cog):
 
     async def send_echo(self, ctx, channel: discord.TextChannel = 740650365078339667):
         
-        channel.send("Hello World")
+        ctx.send("Hello World")
 
         # Grab 2 lines from database, send to discord and mark as sent
         self.cursor.execute("SELECT uid,line FROM echo WHERE echoed='0' ORDER BY epoch ASC LIMIT 2")
