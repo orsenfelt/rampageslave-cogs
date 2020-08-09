@@ -8,9 +8,6 @@ import aiohttp
 from redbot.core import commands
 from redbot.core.utils.chat_formatting import box
 
-
-
-
 class EQEcho(commands.Cog):
 
 	def __init__(self):
@@ -19,7 +16,4 @@ class EQEcho(commands.Cog):
 
     @commands.command(name="test", brief="Just Testing")
     async def test(self, ctx):
-
         await author.send("Hello World")
-		
-		
