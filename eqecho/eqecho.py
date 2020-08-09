@@ -20,7 +20,7 @@ class EQEcho(commands.Cog):
     async def test(self, ctx):
         
         self.cursor.execute("SELECT * FROM echo WHERE echoed='0' ORDER BY epoch DESC LIMIT 2")
-        data = cursor.fetchone()
+        data = self.cursor.fetchone()
         
         author = ctx.author
         await author.send(data)
