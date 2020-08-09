@@ -19,14 +19,15 @@ class EQEcho(commands.Cog):
         # Grab 2 lines from database, send to discord and mark as sent
         self.cursor.execute("SELECT uid,line FROM echo WHERE echoed='0' ORDER BY epoch ASC LIMIT 2")
         data = self.cursor.fetchall()
-        
+
+        print(channel)
+
         for line in data:
             ## Update this line to echoed
             sql = "UPDATE echo SET echoed='1' WHERE uid='" + line[0] + "'"
             try:
                 self.cursor.execute(sql)
                 self.db.commit()
-                print(line[1] + "/n")
                 await channel.send(line[1])
             except:
                 self.db.rollback()
