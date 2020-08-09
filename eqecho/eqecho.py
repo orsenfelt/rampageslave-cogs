@@ -26,7 +26,7 @@ class EQEcho(commands.Cog):
         now = str(time.time_ns())
         now = int(now[:-9])
         five_ago = str(now - (60 * 10))
-        sql = "SELECT uid,line FROM echo WHERE echoed='0' AND epoch>'" + five_ago + "' ORDER BY id ASC LIMIT 10"
+        sql = "SELECT uid,line FROM echo WHERE echoed='0' ORDER BY id ASC LIMIT 10"
 
         print("#################")
         print(sql)
@@ -43,8 +43,8 @@ class EQEcho(commands.Cog):
             try:
                 self.cursor.execute(sql)
                 self.db.commit()
-                channel.send(line[1])
-                await asyncio.sleep(0.1)
+                await channel.send(line[1])
+                await asyncio.sleep(1)
             except:
                 print("fail")
                 self.db.rollback()
