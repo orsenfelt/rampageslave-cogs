@@ -43,9 +43,9 @@ class EQEcho(commands.Cog):
 
 
     @commands.command(name="test", brief="Just Testing")
-    async def test(self, ctx):
+    async def test(self, ctx, member_id: int):
         
-        server = ctx.message.server
-        user = ctx.message.author
-        member_object = server.get_member(111584658029826048)
-        await member_object.send("Hello World")
+        member = discord.utils.get(ctx.guild.members, id=member_id)
+        if member:
+            return await ctx.send(f'{member.name} was found.')
+        await ctx.send(f'No member on the server match the id: {member_id}.')
