@@ -34,6 +34,7 @@ class EQEcho(commands.Cog):
                 self.db.rollback()
 
     def _loop_echo(self):
+        global ctx
         channel = ctx.bot.get_channel(int(self.channel))
         self._send_echo(channel)
 
