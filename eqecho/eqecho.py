@@ -19,7 +19,10 @@ class EQEcho(commands.Cog):
         self.loop = self.bot.loop.create_task(self._loop_echo())
         
 
-    async def _send_echo(self, channel):
+    async def _send_echo(self):
+        
+        channel = self.bot.get_channel(int(self.channel))
+
         self.cursor.execute("SELECT uid,line FROM echo WHERE echoed='0' ORDER BY epoch ASC LIMIT 2")
         data = self.cursor.fetchall()
 
@@ -33,15 +36,12 @@ class EQEcho(commands.Cog):
             except:
                 self.db.rollback()
 
-    def _loop_echo(self):
-        global ctx
-        channel = ctx.bot.get_channel(int(self.channel))
-        self._send_echo(channel)
+    async def _loop_echo(self):
+        self._send_echo()
 
 
     @commands.command(name="test", brief="Just Testing")
-    async def test(self, ctx):
-        channel = ctx.bot.get_channel(int(self.channel))
-        await self._send_echo(channel)
+    async def test(self):
+        await self._send_echo()
 
 
