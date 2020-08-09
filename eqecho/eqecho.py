@@ -22,6 +22,10 @@ class EQEcho(commands.Cog):
         while True:
             self.cursor.execute("SELECT uid,line FROM echo WHERE echoed='0' ORDER BY epoch ASC")
             data = self.cursor.fetchall()
+            author = ctx.author
+            
+            for line in data:
+                await author.send(line[1])
 
 
     @commands.command(name="test", brief="Just Testing")
