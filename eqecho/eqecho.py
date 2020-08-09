@@ -18,9 +18,6 @@ class EQEcho(commands.Cog):
     def _get_lines(self):
         self.cursor.execute("SELECT uid,line FROM echo WHERE echoed='0' ORDER BY epoch ASC LIMIT 2")
         data = self.cursor.fetchall()
-        for line in data:
-            print(line[1])
-
         return data
         
         
@@ -51,6 +48,6 @@ class EQEcho(commands.Cog):
     async def test(self, ctx):
         data = self._get_lines()
         for line in data:
-            print(line[1])
+            await self.channel.send(line[1])
 
 
