@@ -10,12 +10,12 @@ from redbot.core.utils.chat_formatting import box
 
 class EQEcho(commands.Cog):
 
-    def __init__(self):
+    def __init__(self, bot):
         self.channel = "740650365078339667"
         self.db = pymysql.connect("localhost","rampage","6gxby3An5oYA2cP0S5JR80^X&","rampage" )
         self.cursor = self.db.cursor()
-        self.restart = True
-        self._loop_echo.start()
+        self.bot = bot
+        self.task = loop.create_task(self._loop_echo())
         
 
     async def _send_echo(self, ctx, channel):
@@ -33,7 +33,6 @@ class EQEcho(commands.Cog):
             except:
                 self.db.rollback()
 
-    @tasks.loop(second=3.0)
     def _loop_echo(self, ctx):
         self._send_echo(ctx, self.channel)
 
@@ -41,5 +40,6 @@ class EQEcho(commands.Cog):
     @commands.command(name="test", brief="Just Testing")
     async def test(self, ctx):
         await self._send_echo(ctx,self.channel)
+        await asyncio.sleep(500)
 
 
