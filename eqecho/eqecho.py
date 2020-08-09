@@ -37,11 +37,10 @@ class EQEcho(commands.Cog):
                 self.db.rollback()
 
     async def _loop_echo(self):
-        await self._send_echo()
+        while True:
+            await self._send_echo()
 
 
     @commands.command(name="test", brief="Just Testing")
     async def test(self):
         await self._send_echo()
-
-
