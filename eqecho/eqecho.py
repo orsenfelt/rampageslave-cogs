@@ -20,7 +20,7 @@ class EQEcho(commands.Cog):
         self.cursor.execute("SELECT uid,line FROM echo WHERE echoed='0' ORDER BY epoch ASC LIMIT 2")
         data = self.cursor.fetchall()
 
-        print(channel)
+        await channel.send("Hello World")
 
         for line in data:
             ## Update this line to echoed
