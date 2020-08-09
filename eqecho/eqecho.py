@@ -1,19 +1,21 @@
-from redbot.core import commands
-from redbot.core.utils.chat_formatting import box
-from algoliasearch.search_client import SearchClient
-
+## Python imports
+import pymysql
 import discord
 import json
 import aiohttp
+
+## Redbot imports
+from redbot.core import commands
+from redbot.core.utils.chat_formatting import box
+
+
 
 
 class EQEcho(commands.Cog):
 
 	def __init__(self):
-		self.algolia = SearchClient.create('B8DJJYO1TJ', '170dfa6a8a4370f791ff13190fd69d2b')
-		self.index = self.algolia.init_index('live')
-		self.aiohttp = aiohttp.ClientSession()
-		self.api_base_url = "http://pantheon101.com/api/v1/"
+        self.serverid = "740650364575023127"
+        self.channelid = "740650365078339667"
 
 	@commands.command(name="search", brief="Search database for *items*, *spells*, *npcs* or *zones*")
 	async def search(self, ctx, *, query):
