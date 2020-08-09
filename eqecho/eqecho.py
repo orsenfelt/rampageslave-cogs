@@ -13,8 +13,8 @@ class EQEcho(commands.Cog):
     def __init__(self):
         self.serverid = "740650364575023127"
         self.channelid = "740650365078339667"
-        db = pymysql.connect("localhost","rampage","6gxby3An5oYA2cP0S5JR80^X&","rampage" )
-        self.cursor = db.cursor()
+        self.db = pymysql.connect("localhost","rampage","6gxby3An5oYA2cP0S5JR80^X&","rampage" )
+        self.cursor = self.db.cursor()
 
     @commands.command(name="test", brief="Just Testing")
     async def test(self, ctx):
@@ -24,4 +24,13 @@ class EQEcho(commands.Cog):
         author = ctx.author
 
         for line in data:
-            await author.send(line)
+
+            ## Update this line to echoed
+            sql = "UPDATE echo SET echoed='1' WHERE uid='" + line[0] + "'"
+            try:
+                self.cursor.execute(sql)
+                self.db.commit()
+                await author.send(line[1])
+            except:
+                self.db.rollback()
+            
