@@ -28,11 +28,9 @@ class EQEcho(commands.Cog):
             try:
                 self.cursor.execute(sql)
                 self.db.commit()
-                await channel.send(line[1])
             except:
                 self.db.rollback()
 
-        return 
 
 
     async def _send_echo(self, ctx, a: int, b: int):
