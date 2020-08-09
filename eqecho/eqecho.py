@@ -48,7 +48,7 @@ class EQEcho(commands.Cog):
         self.cursor.execute("SELECT uid,line FROM echo WHERE echoed='0' ORDER BY epoch ASC LIMIT 5")
         data = self.cursor.fetchall()
         author = ctx.author
-        channel = ctx.channel(self.channel)
+        channel = ctx.get_channel(self.channel)
 
         for line in data:
 
