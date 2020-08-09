@@ -3,6 +3,7 @@ import pymysql
 import discord
 import json
 import aiohttp
+import time
 
 ## Redbot imports
 from redbot.core import Config, commands
@@ -22,8 +23,13 @@ class EQEcho(commands.Cog):
     async def _send_echo(self):
         
         channel = self.bot.get_channel(int(self.channel))
+        now = time.gmtime()
+        five_ago = now - (60 * 5)
+        print("Only getting echoes newer than " + five_ago)
+        sql = "SELECT uid,line FROM echo WHERE echoed='0' AND epoch>'" + five_ago + "' ORDER BY epoch ASC"
+        print(sql)
 
-        self.cursor.execute("SELECT uid,line FROM echo WHERE echoed='0' ORDER BY epoch ASC LIMIT 10")
+        self.cursor.execute("SELECT uid,line FROM echo WHERE echoed='0' AND epoch>'" + five_ago + "' ORDER BY epoch ASC")
         data = self.cursor.fetchall()
 
         for line in data:
