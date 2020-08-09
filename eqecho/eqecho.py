@@ -23,6 +23,7 @@ class EQEcho(commands.Cog):
     async def _send_echo(self):
         channel = self.bot.get_channel(int(self.channel))
         now = time.time_ns()
+        now = now[:-9]
         print("#################")
         print(now)
         print("################")
