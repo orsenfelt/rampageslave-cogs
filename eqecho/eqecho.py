@@ -13,7 +13,6 @@ from redbot.core.utils.chat_formatting import box
 class EQEcho(commands.Cog):
 
     def __init__(self, bot):
-
         defaults = {"channel": "",
                     "dbhost": "localhost",
                     "dbuser": "",
@@ -27,17 +26,12 @@ class EQEcho(commands.Cog):
         self.config.register_guild(**defaults)
 
         self.channel = "740650365078339667"
-        self.db = pymysql.connect("localhost","rampage","6gxby3An5oYA2cP0S5JR80^X&","rampage" )
+        self.db = pymysql.connect("localhost","rampage","6gxby3An5oYA2cP0S5JR80^X&","rampage")
         self.cursor = self.db.cursor()
         self.bot = bot
         self.restart = True
         self.loop = self.bot.loop.create_task(self._loop_echo())
 
-
-    def __unload(self):
-        asyncio.get_event_loop().create_task(self._session.close())
-        self.loop.cancel()
-        
 
     async def _send_echo(self):
         channel = self.bot.get_channel(int(self.channel))
@@ -75,8 +69,6 @@ class EQEcho(commands.Cog):
 
     async def _loop_echo(self):
         while True:
-
-            ## Get the current config echo value
             conf_echo = await self.config.guild(740650364575023127).echo()
             print("################")
             print(conf_echo)
