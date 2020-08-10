@@ -31,7 +31,7 @@ class EQEcho(commands.Cog):
         self.channel = await self.config.channel()
         self.channel = self.bot.get_channel(self.channel)
 
-        print("[#] Channel will be :: {}".format(self.channel)
+        print("[#] Channel will be :: {}".format(self.channel))
 
         now = str(time.time_ns())
         now = int(now[:-9])
