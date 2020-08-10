@@ -20,7 +20,7 @@ class EQEcho(commands.Cog):
         self.config = Config.get_conf(self, identifier=1355242993)
         self.config.register_global(**defaults)
         self.bot = bot
-        self.db = pymsql.connect("localhost","rampage","6gxby3An5oYA2cP0S5JR80^X&","rampage")
+        self.db = pymysql.connect("localhost","rampage","6gxby3An5oYA2cP0S5JR80^X&","rampage")
         self.cursor = self.db.cursor()
         self.restart = True
         self.loop = self.bot.loop.create_task(self._loop_echo())
