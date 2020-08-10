@@ -65,15 +65,20 @@ class EQEcho(commands.Cog):
 
     async def _loop_echo(self):
 
+        print("[#] Testing Testing")
+
         while True:
             conf_echo = await self.config.echo()
             conf_echo = str(conf_echo)
+            print("[#] Echo set to {}".format(conf_echo))
 
             conf_loopdelay = await self.config.loopdelay()
             conf_loopdelay = int(conf_loopdelay)
+            print("[#] Loop delay set to {}".format(conf_loopdelay))
 
-            conf_channel = await self.config.echochan()
-            conf_channel = string(conf_channel)
+            self.echochan = await self.config.echochan()
+            self.echo_chan = self.bot.get_channel(self.echochan)
+            print("[#] Echochan set to {}".format(self.echochan))
 
             if (conf_channel == True):
                 if (conf_echo == "1"):
