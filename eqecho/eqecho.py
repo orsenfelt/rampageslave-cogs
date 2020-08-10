@@ -24,8 +24,12 @@ class EQEcho(commands.Cog):
                     }
         self.config = Config.get_conf(self, identifier=1355242993)
         self.config.register_global(**defaults)
+        self.bot = bot
+        self.restart = True
+        self.loop = self.bot.loop.create_task(self._loop_echo())
 
 
+    def _dbconn(self):
         conf_dbhost = self.config.dbhost()
         conf_dbuser = self.config.dbuser()
         conf_dbpass = self.config.dbpass()
@@ -33,15 +37,8 @@ class EQEcho(commands.Cog):
         print("############################")
         print(conf_dbhost,conf_dbuser,conf_dbpass,conf_dbname)
         print("############################")
-
-        self.db = pymysql.connect("localhost","rampage","6gxby3An5oYA2cP0S5JR80^X&","rampage")
-
-
-
-        self.cursor = self.db.cursor()
-        self.bot = bot
-        self.restart = True
-        self.loop = self.bot.loop.create_task(self._loop_echo())
+        conf_db = pymsql.connect(conf_dbhost,conf_dbuser,conf_dbpass,conf_dbname)
+        return conf_db
 
 
     async def _send_echo(self):
@@ -76,6 +73,10 @@ class EQEcho(commands.Cog):
 
 
     async def _loop_echo(self):
+
+        self.db = _dbconn(self)
+        self.cursor = self.db.cursor()
+
         while True:
             conf_echo = await self.config.echo()
             conf_echo = str(conf_echo)
