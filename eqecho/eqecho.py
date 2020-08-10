@@ -72,13 +72,17 @@ class EQEcho(commands.Cog):
 
             conf_loopdelay = await self.config.loopdelay()
             conf_loopdelay = int(conf_loopdelay)
-            
-            if (conf_echo == "1"):
-                await self._send_echo()
-                await asyncio.sleep(conf_loopdelay)
 
+            conf_channel = await self.config.channel()
+            if (conf_channel == True):
+                if (conf_echo == "1"):
+                    await self._send_echo()
+                    await asyncio.sleep(conf_loopdelay)
+
+                else:
+                    await asyncio.sleep(30)
             else:
-                await asyncio.sleep(30)
+                print("[ALERT] NO CHANNEL SET")
 
 
     @commands.command(name="setecho", brief="Enable (1) or Disable (2) the echo loop")
@@ -101,7 +105,7 @@ class EQEcho(commands.Cog):
 
     @commands.command(name="getchannel", brief="Get the channel ID")
     async def getchannel(self, ctx):
-        setting = await self.config.guild()
+        setting = await self.config.channel()
         await ctx.send("[>] Current __channel__ setting is :: {}".format(setting))
 
 
