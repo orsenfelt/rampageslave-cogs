@@ -30,7 +30,7 @@ class EQEcho(commands.Cog):
         self.cursor = self.db.cursor()
         self.bot = bot
         self.restart = True
-        self.loop = self.bot.loop.create_task(self._loop_echo())
+        self.loop = self.bot.loop.create_task(self._loop_echo(ctx))
         
 
     async def _send_echo(self):
