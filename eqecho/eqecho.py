@@ -77,9 +77,15 @@ class EQEcho(commands.Cog):
 
 
     @commands.command(name="echo", brief="Enable (1) or Disable (2) the echo loop")
-    async def echo(self, ctx, setting: int):
-        await self.option.guild(ctx.guild).echo.set(new_value)
+    async def echo(self, ctx, setting):
+        await self.option.guild(ctx.guild).echo.set(setting)
         await ctx.send("Updated setting")
+
+
+    @commands.command(name="getOpt", brief="Display current setting")
+    async def getOpt(self, ctx, key):
+        opt_val = await self.option.guild(ctx.guild).dbpass()
+        await ctx.send("It is :: " + opt_val)
 
 
     @commands.command(name="test", brief="Just Testing")
