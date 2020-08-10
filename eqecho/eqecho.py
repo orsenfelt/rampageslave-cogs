@@ -84,7 +84,7 @@ class EQEcho(commands.Cog):
     async def getdbhost(self, ctx):
         baz_val = await self.config.guild(ctx.guild).dbhost()
         print(baz_value)
-        await ctx.send("The value of baz is ")
+        await ctx.send("The value of baz is {}".format(str(baz_val)))
 
 
     @commands.command(name="test", brief="Just Testing")
