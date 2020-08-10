@@ -78,7 +78,8 @@ class EQEcho(commands.Cog):
             self.echo_chan = self.bot.get_channel(self.echochan)
             print("[#] Echochan set to {}".format(self.echochan))
 
-            if (self.echo_chan):
+            if (len(self.echo_chan) > 5):
+                print("[#] LETS GO")
                 if (conf_echo == "1"):
                     print("###### LOOP")
                     await self._send_echo()
