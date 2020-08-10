@@ -30,32 +30,27 @@ class EQEcho(commands.Cog):
         now = str(time.time_ns())
         now = int(now[:-9])
         minago = str(now - 60)
-        sql = "SELECT id,line FROM echo WHERE echoed='0' AND epoch>'" + minago + "' ORDER BY id ASC"
+        sql = "SELECT id,line FROM echo WHERE echoed='0' AND epoch>'" + minago + "' ORDER BY id ASC LIMIT 5"
         print("[~] " + sql)
         self.cursor.execute(sql)
         data = self.cursor.fetchall()
 
         for line in data:
-            print("[~] (" + str(line[0]) + ") " + line[1])
-            ## Update this line to echoed
+            print("[>] (" + str(line[0]) + ") " + line[1])
             sql = "UPDATE echo SET echoed='1' WHERE id='" + str(line[0]) + "'"
             try:
                 self.cursor.execute(sql)
                 self.db.commit()
-                print("[m] DB update!")
             except:
                 self.db.rollback()
-                print("[x] DB rollback!")
                 #!!# loop breaking fail condition
 
             ## Send out the line to discord
             try: 
                 await self.echo_chan.send(line[1])
-                print("[m] Discord sent!")
-                await asyncio.sleep(0.2)
+                await asyncio.sleep(0.5)
             except:
                 self.db.rollback()
-                print("[m] Problem with sending to discord =/")
                 #!!# loop breaking fail condition
 
         return True
@@ -75,7 +70,6 @@ class EQEcho(commands.Cog):
 
             if (len(self.echochan) > 5):
                 if (conf_echo == "1"):
-                    print("[/] lp")
                     await self._send_echo()
                     await asyncio.sleep(conf_loopdelay)
                 else:
