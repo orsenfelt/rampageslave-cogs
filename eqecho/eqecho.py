@@ -25,6 +25,10 @@ class EQEcho(commands.Cog):
         self.restart = True
         self.loop = self.bot.loop.create_task(self._loop_echo())
 
+    def cog_unload(self):
+        if self._loop_echo:
+            self._loop_echo.cancel()
+
 
     async def _send_echo(self):
         now = str(time.time_ns())
@@ -61,6 +65,7 @@ class EQEcho(commands.Cog):
         conf_echo = str(conf_echo)
 
         while (conf_echo == "1"):
+
             conf_loopdelay = await self.config.loopdelay()
             conf_loopdelay = int(conf_loopdelay)
 
