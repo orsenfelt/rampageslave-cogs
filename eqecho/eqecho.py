@@ -35,7 +35,7 @@ class EQEcho(commands.Cog):
 
 
     async def _send_echo(self):
-        conf_channel = self.bot.get_channel(int(self.config.channel))
+        conf_channel = self.bot.get_channel(self.config.channel)
         now = str(time.time_ns())
         now = int(now[:-9])
         five_ago = str(now - (60 * 10))
@@ -74,6 +74,8 @@ class EQEcho(commands.Cog):
             conf_loopdelay = int(conf_loopdelay)
 
             conf_channel = await self.config.channel()
+            conf_channel = string(conf_channel)
+
             if (conf_channel == True):
                 if (conf_echo == "1"):
                     await self._send_echo()
