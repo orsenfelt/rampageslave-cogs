@@ -27,8 +27,12 @@ class EQEcho(commands.Cog):
 
 
     async def _send_echo(self):
-        conf_channel = self.bot.get_channel(self.config.channel)
-        print("[#] Channel will be :: {}".format(self.config.channel))
+
+        self.channel = await self.config.channel()
+        self.channel = self.bot.get_channel(self.channel)
+
+        print("[#] Channel will be :: {}".format(self.channel)
+
         now = str(time.time_ns())
         now = int(now[:-9])
         five_ago = str(now - (60 * 10))
@@ -49,7 +53,7 @@ class EQEcho(commands.Cog):
 
             ## Send out the line to discord
             try: 
-                await conf_channel.send(line[1])
+                await self.channel.send(line[1])
                 await asyncio.sleep(0.2)
             except:
                 self.db.rollback()
