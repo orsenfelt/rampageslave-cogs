@@ -20,7 +20,7 @@ class EQEcho(commands.Cog):
                     "dbpass": "",
                     "dbname": "",
                     "loopdelay": 5,
-                    "echo": 0
+                    "echo": "0"
                     }
         self.config = Config.get_conf(self, identifier=1355242993, force_registration=True)
         self.config.register_guild(**defaults)
@@ -35,7 +35,6 @@ class EQEcho(commands.Cog):
 
     async def _send_echo(self):
         channel = self.bot.get_channel(int(self.channel))
-        
         return "done"
 
         now = str(time.time_ns())
@@ -74,7 +73,7 @@ class EQEcho(commands.Cog):
             ## Get the current config echo value
             conf_echo = await self.config.guild(ctx.guild).echo()
             
-            if (conf_echo === 1):
+            if (conf_echo = "1"):
                 print("Loop >")
                 await self._send_echo()
                 await asyncio.sleep(5)
