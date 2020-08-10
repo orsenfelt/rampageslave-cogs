@@ -12,7 +12,7 @@ from redbot.core.utils.chat_formatting import box
 
 class EQEcho(commands.Cog):
 
-    def __init__(self, bot, ctx):
+    def __init__(self, bot, ctx: commands.Context):
 
         defaults = {"channel": "",
                     "dbhost": "localhost",
