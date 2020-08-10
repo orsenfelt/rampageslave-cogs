@@ -84,7 +84,7 @@ class EQEcho(commands.Cog):
     @commands.command(name="getdbhost", brief="Get DB Host")
     async def getdbhost(self, ctx):
         baz_val = await self.config.guild(ctx.guild).dbhost()
-        await ctx.send("The value of baz is {}".format("True" if baz_val else "False"))
+        await ctx.send("The value of baz is {}".format(str(baz_value)))
 
 
     @commands.command(name="test", brief="Just Testing")
