@@ -41,9 +41,9 @@ class EQEcho(commands.Cog):
             try:
                 self.cursor.execute(sql)
                 self.db.commit()
-                await self.echo_chan.send(line[1])
-                await asyncio.sleep(0.5)
+                self.echo_chan.send(line[1])
                 print("[^] Done")
+                sleep(0.2)
             except:
                 self.db.rollback()
 
