@@ -30,7 +30,7 @@ class EQEcho(commands.Cog):
         now = str(time.time_ns())
         now = int(now[:-9])
         five_ago = str(now - (60 * 10))
-        sql = "SELECT id,line FROM echo WHERE echoed='0' AND epoch>'" + five_ago + "' ORDER BY id ASC LIMIT 10"
+        sql = "SELECT id,line FROM echo WHERE echoed='0' AND epoch>'" + five_ago + "' ORDER BY id ASC"
         print("[#] " + sql)
         self.cursor.execute(sql)
         data = self.cursor.fetchall()
@@ -104,7 +104,6 @@ class EQEcho(commands.Cog):
 
     @commands.command(name="test", brief="Just Testing")
     async def test(self, ctx):
-
         self.echochan = await self.config.echochan()
         self.echo_chan = self.bot.get_channel(int(self.echochan))
         await self.echo_chan.send("Starting test echo to :: {}".format(self.echochan))
