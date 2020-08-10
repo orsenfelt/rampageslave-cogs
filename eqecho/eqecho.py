@@ -66,6 +66,9 @@ class EQEcho(commands.Cog):
 
         while (conf_echo == "1"):
 
+            conf_echo = await self.config.echo()
+            conf_echo = str(conf_echo)
+
             conf_loopdelay = await self.config.loopdelay()
             conf_loopdelay = int(conf_loopdelay)
 
