@@ -69,7 +69,6 @@ class EQEcho(commands.Cog):
 
     async def _loop_echo(self, ctx):
         while True:
-            
             ## Get the current config echo value
             conf_echo = await self.config.guild(ctx.guild).echo()
             
@@ -86,7 +85,7 @@ class EQEcho(commands.Cog):
     @commands.command(name="echo", brief="Enable (1) or Disable (2) the echo loop")
     async def echo(self, ctx, setting):
         await self.config.guild(ctx.guild).echo.set(setting)
-        await ctx.send("Updated setting")
+        await ctx.send("Updated")
 
 
     @commands.command(name="getdbhost", brief="Get DB Host")
