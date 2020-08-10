@@ -25,20 +25,16 @@ class EQEcho(commands.Cog):
         self.config = Config.get_conf(self, identifier=1355242993)
         self.config.register_global(**defaults)
         self.bot = bot
+
+        self_dbhost = self.config.dbhost()
+        self_dbuser = self.config.dbuser()
+        self_dbpass = self.config.dbpass()
+        self_dbname = self.config.dbname()
+        print(self.config.dbname())
+        self_db = pymsql.connect(self_dbhost,self_dbuser,self_dbpass,self_dbname)
+
         self.restart = True
         self.loop = self.bot.loop.create_task(self._loop_echo())
-
-
-    def _dbconn(self):
-        conf_dbhost = self.config.dbhost()
-        conf_dbuser = self.config.dbuser()
-        conf_dbpass = self.config.dbpass()
-        conf_dbname = self.config.dbname()
-        print("############################")
-        print(conf_dbhost,conf_dbuser,conf_dbpass,conf_dbname)
-        print("############################")
-        conf_db = self.pymsql.connect(conf_dbhost,conf_dbuser,conf_dbpass,conf_dbname)
-        return conf_db
 
 
     async def _send_echo(self):
