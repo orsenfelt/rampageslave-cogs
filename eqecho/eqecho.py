@@ -10,20 +10,21 @@ import asyncio
 from redbot.core import Config, commands
 from redbot.core.utils.chat_formatting import box
 
-defaults = {"Channel": 740650365078339667,
-            "Dbhost": "localhost",
-            "Dbuser": "rampage",
-            "Dbpass": "6gxby3An5oYA2cP0S5JR80^X&",
-            "Dbname": "rampage",
-            "Loopdelay": 5,
-            "Echo": 0
+defaults = {"channel": "",
+            "dbhost": "localhost",
+            "dbuser": "",
+            "dbpass": "",
+            "dbname": "",
+            "loopdelay": 5,
+            "echo": 0
             }
 
 class EQEcho(commands.Cog):
 
     def __init__(self, bot):
 
-        self.sets = Config.get_conf(self, identifier=1355242993)
+        self.sets = Config.get_conf(self, identifier=1355242993, force_registration=True)
+        self.sets.register_guild(**defaults)
 
         self.channel = "740650365078339667"
         self.db = pymysql.connect("localhost","rampage","6gxby3An5oYA2cP0S5JR80^X&","rampage" )
@@ -77,8 +78,8 @@ class EQEcho(commands.Cog):
 
     @commands.command(name="echo", brief="Enable (1) or Disable (2) the echo loop")
     async def echo(self, ctx, setting: int):
-        await self.sets.Echo.set(setting)
-        await ctx.send("Updated Echo to {setting}.")
+        await self.sets.guild(ctx.guild).echo.set(new_value)
+        await ctx.send("Updated setting")
 
 
     @commands.command(name="test", brief="Just Testing")
