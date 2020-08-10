@@ -22,8 +22,8 @@ class EQEcho(commands.Cog):
                     "loopdelay": 5,
                     "echo": "0"
                     }
-        self.config = Config.get_conf(self, identifier=1355242993, force_registration=True)
-        self.config.register_guild(**defaults)
+        self.config = Config.get_conf(self, identifier=1355242993)
+        self.config.register_global(**defaults)
 
         self.guild = "740650364575023127"
         self.channel = "740650365078339667"
@@ -88,25 +88,25 @@ class EQEcho(commands.Cog):
 
     @commands.command(name="setecho", brief="Enable (1) or Disable (2) the echo loop")
     async def setecho(self, ctx, setting):
-        await self.config.guild(ctx.guild).echo.set(setting)
+        await self.config.echo.set(setting)
         await ctx.send("[#] Updated __echo__ setting to :: {}".format(setting))
 
 
     @commands.command(name="getguild", brief="Get the guild ID")
     async def setguild(self, ctx):
-        setting = await self.config.guild(ctx.guild).guild()
+        setting = await self.config.guild()
         await ctx.send("[>] Current __guild__ setting is :: {}".format(setting))
 
 
     @commands.command(name="setguild", brief="Set the guild ID")
     async def setguild(self, ctx, setting):
-        await self.config.guild(ctx.guild).guild.set(setting)
+        await self.config.guild.set(setting)
         await ctx.send("[#] Updated __guild__ setting to :: {}".format(setting))
 
 
     @commands.command(name="setchannel", brief="Set the channel ID to echo into")
     async def setchannel(self, ctx, setting):
-        await self.config.guild(ctx.guild).channel.set(setting)
+        await self.config.channel.set(setting)
         await ctx.send("[#] Updated __channel__ setting to :: {}".format(setting))
 
 
