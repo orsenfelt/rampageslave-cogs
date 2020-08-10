@@ -31,27 +31,30 @@ class EQEcho(commands.Cog):
         now = int(now[:-9])
         five_ago = str(now - (60 * 10))
         sql = "SELECT id,line FROM echo WHERE echoed='0' AND epoch>'" + five_ago + "' ORDER BY id ASC"
-        print("[#] " + sql)
         self.cursor.execute(sql)
         data = self.cursor.fetchall()
 
         for line in data:
-            
+            print("[~] " + line[1])
             ## Update this line to echoed
             sql = "UPDATE echo SET echoed='1' WHERE id='" + line[0] + "'"
             try:
                 self.cursor.execute(sql)
                 self.db.commit()
+                print("[m] DB update!")
             except:
                 self.db.rollback()
+                print("[x] DB rollback!")
                 #!!# loop breaking fail condition
 
             ## Send out the line to discord
             try: 
                 await self.echo_chan.send(line[1])
+                print("[m] Discord sent!")
                 await asyncio.sleep(0.2)
             except:
                 self.db.rollback()
+                print("[m] Problem with sending to discord =/")
                 #!!# loop breaking fail condition
 
         return True
