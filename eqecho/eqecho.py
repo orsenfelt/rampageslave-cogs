@@ -43,7 +43,7 @@ class EQEcho(commands.Cog):
                 self.db.commit()
                 self.echo_chan.send(line[1])
                 print("[^] Done")
-                sleep(0.2)
+                sleep(1)
             except:
                 self.db.rollback()
 
