@@ -84,8 +84,7 @@ class EQEcho(commands.Cog):
 
     @commands.command(name="getOpt", brief="Display current setting")
     async def getOpt(self, ctx, key):
-        opt_val = await self.option.guild(ctx.guild).dbpass()
-        await ctx.send("It is :: " + opt_val)
+        await ctx.send("Current guild id is ::" + ctx.guild)
 
 
     @commands.command(name="test", brief="Just Testing")
