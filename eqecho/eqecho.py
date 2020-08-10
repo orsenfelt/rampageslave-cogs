@@ -92,6 +92,12 @@ class EQEcho(commands.Cog):
         await ctx.send("[#] Updated __echo__ setting to :: {}".format(setting))
 
 
+    @commands.command(name="getguild", brief="Get the guild ID")
+    async def setguild(self, ctx):
+        setting = await self.config.guild(ctx.guild).guild()
+        await ctx.send("[>] Current __guild__ setting is :: {}".format(setting))
+
+
     @commands.command(name="setguild", brief="Set the guild ID")
     async def setguild(self, ctx, setting):
         await self.config.guild(ctx.guild).guild.set(setting)
