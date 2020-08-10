@@ -69,14 +69,13 @@ class EQEcho(commands.Cog):
 
     async def _loop_echo(self):
         while True:
-            conf_echo = await self.config.guild(740650364575023127).echo()
+            conf_echo = await self.config.guild(str(740650364575023127)).echo()
             print("################")
             print(conf_echo)
             print("################")
             conf_echo = str(conf_echo)
             
             if (conf_echo == "1"):
-                print("Loop >")
                 await self._send_echo()
                 await asyncio.sleep(5)
 
@@ -85,28 +84,22 @@ class EQEcho(commands.Cog):
                 await asyncio.sleep(60)
 
 
-    @commands.command(name="echo", brief="Enable (1) or Disable (2) the echo loop")
-    async def echo(self, ctx, setting):
+    @commands.command(name="setecho", brief="Enable (1) or Disable (2) the echo loop")
+    async def setecho(self, ctx, setting):
         await self.config.guild(ctx.guild).echo.set(setting)
-        await ctx.send("Updated")
+        await ctx.send("[#] Updated __echo__ setting to :: {}".format(setting))
 
 
     @commands.command(name="setguild", brief="Set the guild ID")
     async def setguild(self, ctx, setting):
         await self.config.guild(ctx.guild).guild.set(setting)
-        await ctx.send("guild ID is :: {}".format(setting))
+        await ctx.send("[#] Updated __guild__ setting to :: {}".format(setting))
 
 
     @commands.command(name="setchannel", brief="Set the channel ID to echo into")
     async def setchannel(self, ctx, setting):
         await self.config.guild(ctx.guild).channel.set(setting)
-        await ctx.send("Will echo to :: {}".format(setting))
-
-
-    @commands.command(name="getdbhost", brief="Get DB Host")
-    async def getconf(self, ctx, key: str):
-        baz_val = await self.config.guild(ctx.guild).dbhost()
-        await ctx.send("The value of baz is {}".format(str(baz_val)))
+        await ctx.send("[#] Updated __channel__ setting to :: {}".format(setting))
 
 
     @commands.command(name="test", brief="Just Testing")
