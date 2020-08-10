@@ -32,7 +32,7 @@ class EQEcho(commands.Cog):
         self.echo_chan = self.bot.get_channel(self.echochan)
 
         print("[#] Channel will be :: {}".format(self.echochan))
-        await self.echochan.send("Hello World")
+        await self.echo_chan.send("Hello World")
 
         now = str(time.time_ns())
         now = int(now[:-9])
