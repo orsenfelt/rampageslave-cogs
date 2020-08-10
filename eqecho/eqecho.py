@@ -20,18 +20,24 @@ class EQEcho(commands.Cog):
         self.config = Config.get_conf(self, identifier=1355242993)
         self.config.register_global(**defaults)
         self.bot = bot
-        self.db = pymysql.connect("localhost","rampage","6gxby3An5oYA2cP0S5JR80^X&","rampage")
-        self.cursor = self.db.cursor()
         self.restart = True
         self.loop = self.bot.loop.create_task(self._loop_echo())
 
 
     async def _send_echo(self):
+
+        ## Connect to DB
+        self.db = pymysql.connect("localhost","rampage","6gxby3An5oYA2cP0S5JR80^X&","rampage")
+        self.cursor = self.db.cursor()
+
+        ## Put together our search
         now = str(time.time_ns())
         now = int(now[:-9])
         minago = str(now - (60 * 15))
         sql = "SELECT id,line FROM echo WHERE echoed='0' AND epoch>'" + minago + "' ORDER BY id ASC LIMIT 2"
         print("[~] " + sql)
+
+        ## Execute search
         self.cursor.execute(sql)
         data = self.cursor.fetchall()
 
@@ -46,6 +52,9 @@ class EQEcho(commands.Cog):
                 sleep(0.6)
             except:
                 self.db.rollback()
+
+        ## Close database connection
+        self.db.close()
 
 
     async def _loop_echo(self):
