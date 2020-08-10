@@ -80,17 +80,17 @@ class EQEcho(commands.Cog):
             self.echo_chan = self.bot.get_channel(self.echochan)
             print("[#] Echochan set to {}".format(self.echochan))
 
-            if (conf_channel == True):
+            if (self.echo_chan):
                 if (conf_echo == "1"):
                     print("###### LOOP")
                     await self._send_echo()
                     await asyncio.sleep(conf_loopdelay)
-
                 else:
                     print("XXXXX NO LOOP")
                     await asyncio.sleep(30)
             else:
                 print("[ALERT] NO CHANNEL SET")
+                continue
 
 
     @commands.command(name="setecho", brief="Enable (1) or Disable (2) the echo loop")
