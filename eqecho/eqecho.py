@@ -68,10 +68,20 @@ class EQEcho(commands.Cog):
         return True
 
 
-    async def _loop_echo(self):
+    async def _loop_echo(self, ctx):
         while True:
-            await self._send_echo()
-            await asyncio.sleep(5)
+            
+            ## Get the current config echo value
+            conf_echo = await self.config.guild(ctx.guild).echo()
+            
+            if (conf_echo === 1):
+                print("Loop >")
+                await self._send_echo()
+                await asyncio.sleep(5)
+
+            else:
+                print("No loops")
+                await asyncio.sleep(60)
 
 
     @commands.command(name="echo", brief="Enable (1) or Disable (2) the echo loop")
@@ -81,7 +91,7 @@ class EQEcho(commands.Cog):
 
 
     @commands.command(name="getdbhost", brief="Get DB Host")
-    async def getdbhost(self, ctx):
+    async def getconf(self, ctx, key: str):
         baz_val = await self.config.guild(ctx.guild).dbhost()
         await ctx.send("The value of baz is {}".format(str(baz_val)))
 
