@@ -41,7 +41,7 @@ class EQEcho(commands.Cog):
             try:
                 self.cursor.execute(sql)
                 self.db.commit()
-                self.echo_chan.send(line[1])
+                await self.echo_chan.send(line[1])
                 print("[^] Done")
                 sleep(0.6)
             except:
