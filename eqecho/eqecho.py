@@ -74,7 +74,7 @@ class EQEcho(commands.Cog):
 
     async def _loop_echo(self):
 
-        self.db = self._dbconn(self)
+        self.db = self._dbconn()
         self.cursor = self.db.cursor()
 
         while True:
@@ -162,6 +162,6 @@ class EQEcho(commands.Cog):
 
     @commands.command(name="test", brief="Just Testing")
     async def test(self, ctx):
-        self.db = self._dbconn(self)
+        self.db = self._dbconn()
         self.cursor = self.db.cursor()
         await self._send_echo()
