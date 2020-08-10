@@ -35,9 +35,9 @@ class EQEcho(commands.Cog):
         data = self.cursor.fetchall()
 
         for line in data:
-            print("[~] " + line[1])
+            print("[~] ("{}") " + line[1]).format(line[0])
             ## Update this line to echoed
-            sql = "UPDATE echo SET echoed='1' WHERE id='" + line[0] + "'"
+            sql = "UPDATE echo SET echoed='1' WHERE id='{}'".format(line[0])
             try:
                 self.cursor.execute(sql)
                 self.db.commit()
