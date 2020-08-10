@@ -36,7 +36,6 @@ class EQEcho(commands.Cog):
     async def _send_echo(self):
         channel = self.bot.get_channel(int(self.channel))
         
-        print("loop would run...")
         return "done"
 
         now = str(time.time_ns())
@@ -84,7 +83,8 @@ class EQEcho(commands.Cog):
     @commands.command(name="getdbhost", brief="Get DB Host")
     async def getdbhost(self, ctx):
         baz_val = await self.config.guild(ctx.guild).dbhost()
-        await ctx.send("The value of baz is {}".format(str(baz_value)))
+        print(baz_value)
+        await ctx.send("The value of baz is ")
 
 
     @commands.command(name="test", brief="Just Testing")
