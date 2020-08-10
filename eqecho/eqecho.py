@@ -65,8 +65,6 @@ class EQEcho(commands.Cog):
 
     async def _loop_echo(self):
 
-        print("[#] Testing Testing")
-
         while True:
             conf_echo = await self.config.echo()
             conf_echo = str(conf_echo)
@@ -90,6 +88,7 @@ class EQEcho(commands.Cog):
                     await asyncio.sleep(30)
             else:
                 print("[ALERT] NO CHANNEL SET")
+                await asyncio.sleep(60)
                 continue
 
 
