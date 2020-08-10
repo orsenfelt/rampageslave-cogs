@@ -71,7 +71,7 @@ class EQEcho(commands.Cog):
 
     async def _loop_echo(self):
         while True:
-            conf_echo = await self.config.guild(self.bot.get_guild(self.guild)).echo()
+            conf_echo = await self.config.echo()
             print("################")
             print(conf_echo)
             print("################")
