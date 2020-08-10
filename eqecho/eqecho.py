@@ -32,6 +32,7 @@ class EQEcho(commands.Cog):
         self.echo_chan = self.bot.get_channel(self.echochan)
 
         print("[#] Channel will be :: {}".format(self.echochan))
+        await self.echochan.send("Hello World")
 
         now = str(time.time_ns())
         now = int(now[:-9])
@@ -75,10 +76,9 @@ class EQEcho(commands.Cog):
             print("[#] Loop delay set to {}".format(conf_loopdelay))
 
             self.echochan = await self.config.echochan()
-            self.echo_chan = self.bot.get_channel(self.echochan)
-            print("[#] echo_chan set to {}".format(self.echo_chan))
+            print("[#] echo_chan set to {}".format(self.echochan))
 
-            if (len(self.echo_chan) > 5):
+            if (len(self.echochan) > 5):
                 print("[#] LETS GO")
                 if (conf_echo == "1"):
                     print("###### LOOP")
