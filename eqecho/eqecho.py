@@ -71,6 +71,7 @@ class EQEcho(commands.Cog):
         while True:
             ## Get the current config echo value
             conf_echo = await self.config.guild(self.bot.guild).echo()
+            print(conf_echo)
             conf_echo = str(conf_echo)
             
             if (conf_echo == "1"):
