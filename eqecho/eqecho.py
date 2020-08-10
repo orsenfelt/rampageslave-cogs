@@ -57,11 +57,10 @@ class EQEcho(commands.Cog):
 
 
     async def _loop_echo(self):
+        conf_echo = await self.config.echo()
+        conf_echo = str(conf_echo)
 
-        while True:
-            conf_echo = await self.config.echo()
-            conf_echo = str(conf_echo)
-
+        while (conf_echo == "1"):
             conf_loopdelay = await self.config.loopdelay()
             conf_loopdelay = int(conf_loopdelay)
 
@@ -69,11 +68,8 @@ class EQEcho(commands.Cog):
             self.echo_chan = self.bot.get_channel(int(self.echochan))
 
             if (len(self.echochan) > 5):
-                if (conf_echo == "1"):
-                    await self._send_echo()
-                    await asyncio.sleep(conf_loopdelay)
-                else:
-                    await asyncio.sleep(30)
+                await self._send_echo()
+                await asyncio.sleep(conf_loopdelay)
             else:
                 print("[x] Channel not set")
                 await asyncio.sleep(60)
