@@ -37,7 +37,7 @@ class EQEcho(commands.Cog):
         print("############################")
         print(conf_dbhost,conf_dbuser,conf_dbpass,conf_dbname)
         print("############################")
-        conf_db = pymsql.connect(conf_dbhost,conf_dbuser,conf_dbpass,conf_dbname)
+        conf_db = self.pymsql.connect(conf_dbhost,conf_dbuser,conf_dbpass,conf_dbname)
         return conf_db
 
 
