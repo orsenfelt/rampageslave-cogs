@@ -30,7 +30,7 @@ class EQEcho(commands.Cog):
         now = str(time.time_ns())
         now = int(now[:-9])
         minago = str(now - (60 * 15))
-        sql = "SELECT id,line FROM echo WHERE echoed='0' AND epoch>'" + minago + "' ORDER BY id ASC LIMIT 5"
+        sql = "SELECT id,line FROM echo WHERE echoed='0' AND epoch>'" + minago + "' ORDER BY id ASC LIMIT 2"
         print("[~] " + sql)
         self.cursor.execute(sql)
         data = self.cursor.fetchall()
@@ -65,7 +65,7 @@ class EQEcho(commands.Cog):
 
             if (len(self.echochan) > 5):
                 await self._send_echo()
-                await asyncio.sleep(conf_loopdelay)
+                await asyncio.sleep(5)
             else:
                 print("[x] Channel not set")
                 await asyncio.sleep(30)
