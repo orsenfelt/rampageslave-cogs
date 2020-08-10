@@ -30,7 +30,7 @@ class EQEcho(commands.Cog):
         now = str(time.time_ns())
         now = int(now[:-9])
         minago = str(now - (60 * 15))
-        sql = "SELECT id,line FROM echo WHERE echoed='0' AND epoch>'" + minago + "' ORDER BY id ASC LIMIT 5"
+        sql = "SELECT id,line FROM echo WHERE epoch>'" + minago + "' ORDER BY id ASC LIMIT 5"
         print("[~] " + sql)
         self.cursor.execute(sql)
         data = self.cursor.fetchall()
