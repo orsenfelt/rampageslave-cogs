@@ -23,8 +23,8 @@ class EQEcho(commands.Cog):
 
     def __init__(self, bot):
 
-        self.sets = Config.get_conf(self, identifier=1355242993, force_registration=True)
-        self.sets.register_guild(**defaults)
+        self.option = Config.get_conf(self, identifier=1355242993, force_registration=True)
+        self.option.register_guild(**defaults)
 
         self.channel = "740650365078339667"
         self.db = pymysql.connect("localhost","rampage","6gxby3An5oYA2cP0S5JR80^X&","rampage" )
@@ -78,7 +78,7 @@ class EQEcho(commands.Cog):
 
     @commands.command(name="echo", brief="Enable (1) or Disable (2) the echo loop")
     async def echo(self, ctx, setting: int):
-        await self.sets.guild(ctx.guild).echo.set(new_value)
+        await self.option.guild(ctx.guild).echo.set(new_value)
         await ctx.send("Updated setting")
 
 
