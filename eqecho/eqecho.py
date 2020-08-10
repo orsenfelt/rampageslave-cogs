@@ -86,6 +86,12 @@ class EQEcho(commands.Cog):
         await ctx.send("[#] Updated __echo__ setting to :: {}".format(setting))
 
 
+    @commands.command(name="setloopdelay", brief="Seconds between DB searches")
+    async def setloopdelay(self, ctx, setting):
+        await self.config.loopdelay.set(setting)
+        await ctx.send("[#] Updated __loopdelay__ setting to :: {}".format(setting))
+
+
     @commands.command(name="getchannel", brief="Get the channel ID")
     async def getchannel(self, ctx):
         setting = await self.config.echochan()
