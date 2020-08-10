@@ -13,7 +13,7 @@ from redbot.core.utils.chat_formatting import box
 class EQEcho(commands.Cog):
 
     def __init__(self, bot):
-        defaults = {"channel": "",
+        defaults = {"echochan": "",
                     "loopdelay": 5,
                     "echo": "0"
                     }
@@ -28,10 +28,10 @@ class EQEcho(commands.Cog):
 
     async def _send_echo(self):
 
-        self.channel = await self.config.channel()
-        self.channel = self.bot.get_channel(self.channel)
+        self.echochan = await self.config.echochan()
+        self.echo_chan = self.bot.get_channel(self.echochan)
 
-        print("[#] Channel will be :: {}".format(self.channel))
+        print("[#] Channel will be :: {}".format(self.echochan))
 
         now = str(time.time_ns())
         now = int(now[:-9])
@@ -97,13 +97,13 @@ class EQEcho(commands.Cog):
 
     @commands.command(name="getchannel", brief="Get the channel ID")
     async def getchannel(self, ctx):
-        setting = await self.config.channel()
+        setting = await self.config.echochan()
         await ctx.send("[>] Current __channel__ setting is :: {}".format(setting))
 
 
     @commands.command(name="setchannel", brief="Set the channel ID to echo into")
     async def setchannel(self, ctx, setting):
-        await self.config.channel.set(setting)
+        await self.config.echochan.set(setting)
         await ctx.send("[#] Updated __channel__ setting to :: {}".format(setting))
 
 
