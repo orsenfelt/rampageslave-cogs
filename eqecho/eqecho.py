@@ -89,10 +89,12 @@ class EQEcho(commands.Cog):
 
             if (conf_channel == True):
                 if (conf_echo == "1"):
+                    print("###### LOOP")
                     await self._send_echo()
                     await asyncio.sleep(conf_loopdelay)
 
                 else:
+                    print("XXXXX NO LOOP")
                     await asyncio.sleep(30)
             else:
                 print("[ALERT] NO CHANNEL SET")
