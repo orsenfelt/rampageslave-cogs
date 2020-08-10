@@ -12,7 +12,7 @@ from redbot.core.utils.chat_formatting import box
 
 class EQEcho(commands.Cog):
 
-    def __init__(self, bot):
+    def __init__(self, bot, ctx):
 
         defaults = {"channel": "",
                     "dbhost": "localhost",
@@ -30,7 +30,7 @@ class EQEcho(commands.Cog):
         self.cursor = self.db.cursor()
         self.bot = bot
         self.restart = True
-        self.loop = self.bot.loop.create_task(self._loop_echo())
+        self.loop = self.bot.loop.create_task(self._loop_echo(ctx))
         
 
     async def _send_echo(self):
@@ -67,10 +67,10 @@ class EQEcho(commands.Cog):
         return True
 
 
-    async def _loop_echo(self):
+    async def _loop_echo(self, ctx):
         while True:
             ## Get the current config echo value
-            conf_echo = await self.config.guild(self.bot.get_guild).echo()
+            conf_echo = await self.config.guild(ctx.guild).echo()
             print("################")
             print(conf_echo)
             print("################")
