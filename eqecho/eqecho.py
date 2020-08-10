@@ -36,6 +36,10 @@ class EQEcho(commands.Cog):
 
     async def _send_echo(self):
         channel = self.bot.get_channel(int(self.channel))
+        
+        print("loop would run...")
+        return "done"
+
         now = str(time.time_ns())
         now = int(now[:-9])
         five_ago = str(now - (60 * 10))
