@@ -23,7 +23,7 @@ class EQEcho(commands.Cog):
 
     def __init__(self, bot):
 
-        self.sets = Config.get_conf(self, identifier=01355242993, force_registration=True)
+        self.sets = Config.get_conf(self, identifier=1355242993, force_registration=True)
         self.sets.register_guild(**defaults)
 
         self.channel = "740650365078339667"
