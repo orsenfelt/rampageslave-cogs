@@ -25,6 +25,7 @@ class EQEcho(commands.Cog):
         self.config = Config.get_conf(self, identifier=1355242993, force_registration=True)
         self.config.register_guild(**defaults)
 
+        self.guild = "740650364575023127"
         self.channel = "740650365078339667"
         self.db = pymysql.connect("localhost","rampage","6gxby3An5oYA2cP0S5JR80^X&","rampage")
         self.cursor = self.db.cursor()
@@ -69,7 +70,7 @@ class EQEcho(commands.Cog):
 
     async def _loop_echo(self):
         while True:
-            conf_echo = await self.config.guild(str(740650364575023127)).echo()
+            conf_echo = await self.config.guild(self.bot.get_guild(self.guild)).echo()
             print("################")
             print(conf_echo)
             print("################")
