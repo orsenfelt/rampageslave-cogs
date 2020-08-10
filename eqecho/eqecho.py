@@ -35,15 +35,11 @@ class EQEcho(commands.Cog):
 
 
     async def _send_echo(self):
-        channel = self.bot.get_channel(int(self.channel))
-
-        print("###### HELLO?")
-
+        conf_channel = self.bot.get_channel(int(self.config.channel))
         now = str(time.time_ns())
         now = int(now[:-9])
         five_ago = str(now - (60 * 10))
         sql = "SELECT id,line FROM echo WHERE echoed='0' AND epoch>'" + five_ago + "' ORDER BY id ASC LIMIT 10"
-
         self.cursor.execute(sql)
         data = self.cursor.fetchall()
 
@@ -56,15 +52,15 @@ class EQEcho(commands.Cog):
                 self.db.commit()
             except:
                 self.db.rollback()
-                ## loop breaking fail condition
+                #!!# loop breaking fail condition
 
             ## Send out the line to discord
             try: 
-                await channel.send(line[1])
+                await conf_channel.send(line[1])
                 await asyncio.sleep(0.2)
             except:
                 self.db.rollback()
-                ## loop breaking fail condition
+                #!!# loop breaking fail condition
 
         return True
 
@@ -72,18 +68,17 @@ class EQEcho(commands.Cog):
     async def _loop_echo(self):
         while True:
             conf_echo = await self.config.echo()
-            print("################")
-            print(conf_echo)
-            print("################")
             conf_echo = str(conf_echo)
+
+            conf_loopdelay = await self.config.loopdelay()
+            conf_loopdelay = int(conf_loopdelay)
             
             if (conf_echo == "1"):
                 await self._send_echo()
-                await asyncio.sleep(5)
+                await asyncio.sleep(conf_loopdelay)
 
             else:
-                print("No loops")
-                await asyncio.sleep(60)
+                await asyncio.sleep(30)
 
 
     @commands.command(name="setecho", brief="Enable (1) or Disable (2) the echo loop")
@@ -93,7 +88,7 @@ class EQEcho(commands.Cog):
 
 
     @commands.command(name="getguild", brief="Get the guild ID")
-    async def setguild(self, ctx):
+    async def getguild(self, ctx):
         setting = await self.config.guild()
         await ctx.send("[>] Current __guild__ setting is :: {}".format(setting))
 
@@ -102,6 +97,12 @@ class EQEcho(commands.Cog):
     async def setguild(self, ctx, setting):
         await self.config.guild.set(setting)
         await ctx.send("[#] Updated __guild__ setting to :: {}".format(setting))
+
+
+    @commands.command(name="getchannel", brief="Get the channel ID")
+    async def getchannel(self, ctx):
+        setting = await self.config.guild()
+        await ctx.send("[>] Current __channel__ setting is :: {}".format(setting))
 
 
     @commands.command(name="setchannel", brief="Set the channel ID to echo into")
