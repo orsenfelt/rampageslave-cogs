@@ -160,4 +160,6 @@ class EQEcho(commands.Cog):
 
     @commands.command(name="test", brief="Just Testing")
     async def test(self, ctx):
+        self.db = _dbconn(self)
+        self.cursor = self.db.cursor()
         await self._send_echo()
