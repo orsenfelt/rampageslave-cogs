@@ -70,7 +70,7 @@ class EQEcho(commands.Cog):
     async def _loop_echo(self):
         while True:
             ## Get the current config echo value
-            conf_echo = await self.config.guild(self.bot.guild).echo()
+            conf_echo = await self.config.guild(self.bot.get_guild).echo()
             print(conf_echo)
             conf_echo = str(conf_echo)
             
@@ -88,6 +88,12 @@ class EQEcho(commands.Cog):
     async def echo(self, ctx, setting):
         await self.config.guild(ctx.guild).echo.set(setting)
         await ctx.send("Updated")
+
+
+    @commands.command(name="setchannel", brief="Set the channel ID to echo into")
+    async def setchannel(self, ctx, setting):
+        await self.config.guild(ctx.guild).channel.set(setting)
+        await ctx.send("Will echo to :: {}".format(setting))
 
 
     @commands.command(name="getdbhost", brief="Get DB Host")
