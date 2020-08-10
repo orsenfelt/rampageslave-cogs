@@ -26,11 +26,13 @@ class EQEcho(commands.Cog):
         self.config.register_global(**defaults)
 
 
-        conf_dbhost = await self.config.dbhost()
-        conf_dbuser = await self.config.dbuser()
-        conf_dbpass = await self.config.dbpass()
-        conf_dbname = await self.config.dbname()
-
+        conf_dbhost = self.config.dbhost()
+        conf_dbuser = self.config.dbuser()
+        conf_dbpass = self.config.dbpass()
+        conf_dbname = self.config.dbname()
+        print("############################")
+        print(conf_dbhost,conf_dbuser,conf_dbpass,conf_dbname)
+        print("############################")
 
         self.db = pymysql.connect("localhost","rampage","6gxby3An5oYA2cP0S5JR80^X&","rampage")
 
