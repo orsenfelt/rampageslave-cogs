@@ -31,6 +31,7 @@ class EQEcho(commands.Cog):
         now = int(now[:-9])
         minago = str(now - (60 * 15))
         sql = "SELECT id,line FROM echo WHERE echoed='0' AND epoch>'" + minago + "' ORDER BY id ASC LIMIT 5"
+        print("[~] " + sql)
         self.cursor.execute(sql)
         data = self.cursor.fetchall()
 
@@ -96,7 +97,7 @@ class EQEcho(commands.Cog):
 
 
     @commands.command(name="test", brief="Just Testing")
-    async def test(self, ctx):
+    async def test(self, ctx):        
         self.echochan = await self.config.echochan()
         self.echo_chan = self.bot.get_channel(int(self.echochan))
         await self.echo_chan.send("Starting test echo to :: {}".format(self.echochan))
