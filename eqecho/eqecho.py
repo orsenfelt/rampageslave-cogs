@@ -12,13 +12,14 @@ from redbot.core.utils.chat_formatting import box
 
 class EQEcho(commands.Cog):
 
-    def __init__(self, bot, ctx: commands.Context):
+    def __init__(self, bot):
 
         defaults = {"channel": "",
                     "dbhost": "localhost",
                     "dbuser": "",
                     "dbpass": "",
                     "dbname": "",
+                    "guild": "",
                     "loopdelay": 5,
                     "echo": "0"
                     }
@@ -30,7 +31,12 @@ class EQEcho(commands.Cog):
         self.cursor = self.db.cursor()
         self.bot = bot
         self.restart = True
-        self.loop = self.bot.loop.create_task(self._loop_echo(ctx))
+        self.loop = self.bot.loop.create_task(self._loop_echo())
+
+
+    def __unload(self):
+        asyncio.get_event_loop().create_task(self._session.close())
+        self.loop.cancel()
         
 
     async def _send_echo(self):
@@ -67,10 +73,11 @@ class EQEcho(commands.Cog):
         return True
 
 
-    async def _loop_echo(self, ctx):
+    async def _loop_echo(self):
         while True:
+
             ## Get the current config echo value
-            conf_echo = await self.config.guild(ctx.guild).echo()
+            conf_echo = await self.config.guild(740650364575023127).echo()
             print("################")
             print(conf_echo)
             print("################")
@@ -90,6 +97,12 @@ class EQEcho(commands.Cog):
     async def echo(self, ctx, setting):
         await self.config.guild(ctx.guild).echo.set(setting)
         await ctx.send("Updated")
+
+
+    @commands.command(name="setguild", brief="Set the guild ID")
+    async def setguild(self, ctx, setting):
+        await self.config.guild(ctx.guild).guild.set(setting)
+        await ctx.send("guild ID is :: {}".format(setting))
 
 
     @commands.command(name="setchannel", brief="Set the channel ID to echo into")
