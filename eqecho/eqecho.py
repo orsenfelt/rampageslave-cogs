@@ -39,6 +39,7 @@ class EQEcho(commands.Cog):
 
         ## Execute search
         self.cursor.execute(sql)
+        data = None
         data = self.cursor.fetchall()
 
         for line in data:
@@ -49,7 +50,7 @@ class EQEcho(commands.Cog):
                 self.db.commit()
                 await self.echo_chan.send(line[1])
                 print("[^] Done")
-                sleep(0.6)
+                sleep(1)
             except:
                 self.db.rollback()
 
