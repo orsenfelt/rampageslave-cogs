@@ -25,10 +25,6 @@ class EQEcho(commands.Cog):
         self.restart = True
         self.loop = self.bot.loop.create_task(self._loop_echo())
 
-    def cog_unload(self):
-        if self._loop_echo:
-            self._loop_echo.cancel()
-
 
     async def _send_echo(self):
         now = str(time.time_ns())
