@@ -29,8 +29,9 @@ class EQEcho(commands.Cog):
     async def _send_echo(self):
         now = str(time.time_ns())
         now = int(now[:-9])
-        five_ago = str(now - (60 * 10))
-        sql = "SELECT id,line FROM echo WHERE echoed='0' AND epoch>'" + five_ago + "' ORDER BY id ASC"
+        minago = str(now - 60)
+        sql = "SELECT id,line FROM echo WHERE echoed='0' AND epoch>'" + minago + "' ORDER BY id ASC"
+        print("[~] " + sql)
         self.cursor.execute(sql)
         data = self.cursor.fetchall()
 
@@ -73,13 +74,11 @@ class EQEcho(commands.Cog):
             self.echo_chan = self.bot.get_channel(int(self.echochan))
 
             if (len(self.echochan) > 5):
-                print("[#] Channel is set")
                 if (conf_echo == "1"):
-                    print("[m] Echo enabled")
+                    print("[/] lp")
                     await self._send_echo()
                     await asyncio.sleep(conf_loopdelay)
                 else:
-                    print("[x] Echo disabled")
                     await asyncio.sleep(30)
             else:
                 print("[x] Channel not set")
