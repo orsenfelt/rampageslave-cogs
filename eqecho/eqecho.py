@@ -64,8 +64,6 @@ class EQEcho(commands.Cog):
 
     async def _loop_echo(self):
 
-        self.db = self._dbconn()
-
         while True:
             conf_echo = await self.config.echo()
             conf_echo = str(conf_echo)
@@ -73,7 +71,7 @@ class EQEcho(commands.Cog):
             conf_loopdelay = await self.config.loopdelay()
             conf_loopdelay = int(conf_loopdelay)
 
-            conf_channel = await self.config.channel()
+            conf_channel = await self.config.echochan()
             conf_channel = string(conf_channel)
 
             if (conf_channel == True):
