@@ -76,7 +76,7 @@ class EQEcho(commands.Cog):
 
             self.echochan = await self.config.echochan()
             self.echo_chan = self.bot.get_channel(self.echochan)
-            print("[#] Echochan set to {}".format(self.echochan))
+            print("[#] echo_chan set to {}".format(self.echo_chan))
 
             if (len(self.echo_chan) > 5):
                 print("[#] LETS GO")
