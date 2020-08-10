@@ -27,13 +27,6 @@ class EQEcho(commands.Cog):
 
 
     async def _send_echo(self):
-
-        self.echochan = await self.config.echochan()
-        self.echo_chan = self.bot.get_channel(int(self.echochan))
-
-        print("[#] Channel will be :: {}".format(self.echochan))
-        await self.echo_chan.send("Hello World")
-
         now = str(time.time_ns())
         now = int(now[:-9])
         five_ago = str(now - (60 * 10))
@@ -55,7 +48,7 @@ class EQEcho(commands.Cog):
 
             ## Send out the line to discord
             try: 
-                await self.channel.send(line[1])
+                await self.echo_chan.send(line[1])
                 await asyncio.sleep(0.2)
             except:
                 self.db.rollback()
@@ -74,18 +67,19 @@ class EQEcho(commands.Cog):
             conf_loopdelay = int(conf_loopdelay)
 
             self.echochan = await self.config.echochan()
+            self.echo_chan = self.bot.get_channel(int(self.echochan))
 
             if (len(self.echochan) > 5):
-                print("[#] LETS GO")
+                print("[#] Channel is set")
                 if (conf_echo == "1"):
-                    print("###### LOOP")
+                    print("[m] Echo enabled")
                     await self._send_echo()
                     await asyncio.sleep(conf_loopdelay)
                 else:
-                    print("XXXXX NO LOOP")
+                    print("[x] Echo disabled")
                     await asyncio.sleep(30)
             else:
-                print("[ALERT] NO CHANNEL SET")
+                print("[x] Channel not set")
                 await asyncio.sleep(60)
                 continue
 
@@ -110,4 +104,8 @@ class EQEcho(commands.Cog):
 
     @commands.command(name="test", brief="Just Testing")
     async def test(self, ctx):
+
+        self.echochan = await self.config.echochan()
+        self.echo_chan = self.bot.get_channel(int(self.echochan))
+        await self.echo_chan.send("Starting test echo to :: {}".format(self.echochan))
         await self._send_echo()
