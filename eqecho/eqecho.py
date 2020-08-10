@@ -24,9 +24,6 @@ class EQEcho(commands.Cog):
                     }
         self.config = Config.get_conf(self, identifier=1355242993)
         self.config.register_global(**defaults)
-
-        self.guild = "740650364575023127"
-        self.channel = "740650365078339667"
         self.db = pymysql.connect("localhost","rampage","6gxby3An5oYA2cP0S5JR80^X&","rampage")
         self.cursor = self.db.cursor()
         self.bot = bot
@@ -115,6 +112,36 @@ class EQEcho(commands.Cog):
     async def setchannel(self, ctx, setting):
         await self.config.channel.set(setting)
         await ctx.send("[#] Updated __channel__ setting to :: {}".format(setting))
+
+
+
+
+
+
+
+    @commands.command(name="setdbhost", brief="Set the dbhost")
+    async def setdbhost(self, ctx, setting):
+        await self.config.dbhost.set(setting)
+        await ctx.send("[#] Updated __dbhost__ setting to :: {}".format(setting))
+
+    @commands.command(name="setdbuser", brief="Set the dbuser")
+    async def setdbuser(self, ctx, setting):
+        await self.config.dbuser.set(setting)
+        await ctx.send("[#] Updated __dbuser__ setting to :: {}".format(setting))
+
+    @commands.command(name="setdbpass", brief="Set the dbpass")
+    async def setdbpass(self, ctx, setting):
+        await self.config.dbpass.set(setting)
+        await ctx.send("[#] Updated __dbpass__ setting to :: {}".format(setting))
+
+    @commands.command(name="setdbname", brief="Set the dbname")
+    async def setdbname(self, ctx, setting):
+        await self.config.dbname.set(setting)
+        await ctx.send("[#] Updated __dbname__ setting to :: {}".format(setting))
+
+
+
+
 
 
     @commands.command(name="test", brief="Just Testing")
