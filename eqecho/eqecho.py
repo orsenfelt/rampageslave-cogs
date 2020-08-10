@@ -24,7 +24,18 @@ class EQEcho(commands.Cog):
                     }
         self.config = Config.get_conf(self, identifier=1355242993)
         self.config.register_global(**defaults)
+
+
+        conf_dbhost = await self.config.dbhost()
+        conf_dbuser = await self.config.dbuser()
+        conf_dbpass = await self.config.dbpass()
+        conf_dbname = await self.config.dbname()
+
+
         self.db = pymysql.connect("localhost","rampage","6gxby3An5oYA2cP0S5JR80^X&","rampage")
+
+
+
         self.cursor = self.db.cursor()
         self.bot = bot
         self.restart = True
