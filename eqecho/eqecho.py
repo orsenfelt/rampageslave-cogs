@@ -28,6 +28,7 @@ class EQEcho(commands.Cog):
 
     async def _send_echo(self):
         conf_channel = self.bot.get_channel(self.config.channel)
+        print("[#] Channel will be :: {}".format(self.config.channel))
         now = str(time.time_ns())
         now = int(now[:-9])
         five_ago = str(now - (60 * 10))
@@ -104,6 +105,4 @@ class EQEcho(commands.Cog):
 
     @commands.command(name="test", brief="Just Testing")
     async def test(self, ctx):
-        self.db = self._dbconn()
-        self.cursor = self.db.cursor()
         await self._send_echo()
