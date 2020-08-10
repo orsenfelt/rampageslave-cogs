@@ -34,26 +34,17 @@ class EQEcho(commands.Cog):
         self.cursor.execute(sql)
         data = self.cursor.fetchall()
 
-
         for line in data:
             print("[>] (" + str(line[0]) + ") " + line[1])
             sql = "UPDATE echo SET echoed='1' WHERE id='" + str(line[0]) + "'"
             try:
                 self.cursor.execute(sql)
                 self.db.commit()
-            except:
-                self.db.rollback()
-                #!!# loop breaking fail condition
-
-            ## Send out the line to discord
-            try: 
                 await self.echo_chan.send(line[1])
                 await asyncio.sleep(0.5)
+                print("[^] Done")
             except:
                 self.db.rollback()
-                #!!# loop breaking fail condition
-
-        return True
 
 
     async def _loop_echo(self):
@@ -73,7 +64,7 @@ class EQEcho(commands.Cog):
 
             if (len(self.echochan) > 5):
                 await self._send_echo()
-                await asyncio.sleep(30)
+                await asyncio.sleep(conf_loopdelay)
             else:
                 print("[x] Channel not set")
                 await asyncio.sleep(30)
