@@ -10,21 +10,20 @@ import asyncio
 from redbot.core import Config, commands
 from redbot.core.utils.chat_formatting import box
 
-defaults = {"channel": "",
-            "dbhost": "localhost",
-            "dbuser": "",
-            "dbpass": "",
-            "dbname": "",
-            "loopdelay": 5,
-            "echo": 0
-            }
-
 class EQEcho(commands.Cog):
 
     def __init__(self, bot):
 
-        self.option = Config.get_conf(self, identifier=1355242993, force_registration=True)
-        self.option.register_guild(**defaults)
+        defaults = {"channel": "",
+                    "dbhost": "localhost",
+                    "dbuser": "",
+                    "dbpass": "",
+                    "dbname": "",
+                    "loopdelay": 5,
+                    "echo": 0
+                    }
+        self.config = Config.get_conf(self, identifier=1355242993, force_registration=True)
+        self.config.register_guild(**defaults)
 
         self.channel = "740650365078339667"
         self.db = pymysql.connect("localhost","rampage","6gxby3An5oYA2cP0S5JR80^X&","rampage" )
@@ -78,13 +77,14 @@ class EQEcho(commands.Cog):
 
     @commands.command(name="echo", brief="Enable (1) or Disable (2) the echo loop")
     async def echo(self, ctx, setting):
-        await self.option.guild(ctx.guild).echo.set(setting)
+        await self.config.guild(ctx.guild).echo.set(setting)
         await ctx.send("Updated setting")
 
 
-    @commands.command(name="getOpt", brief="Display current setting")
-    async def getOpt(self, ctx, key):
-        await ctx.send("Current guild id is ::" + ctx.guild)
+    @commands.command(name="getdbhost", brief="Get DB Host")
+    async def getdbhost(self, ctx):
+        baz_val = await self.config.guild(ctx.guild).dbhost()
+        await ctx.send("The value of baz is {}".format("True" if baz_val else "False"))
 
 
     @commands.command(name="test", brief="Just Testing")
