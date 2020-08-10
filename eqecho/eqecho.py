@@ -37,6 +37,7 @@ class EQEcho(commands.Cog):
         now = int(now[:-9])
         five_ago = str(now - (60 * 10))
         sql = "SELECT id,line FROM echo WHERE echoed='0' AND epoch>'" + five_ago + "' ORDER BY id ASC LIMIT 10"
+        print("[#] " + sql)
         self.cursor.execute(sql)
         data = self.cursor.fetchall()
 
