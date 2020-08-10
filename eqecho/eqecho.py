@@ -71,8 +71,9 @@ class EQEcho(commands.Cog):
         while True:
             ## Get the current config echo value
             conf_echo = await self.config.guild(ctx.guild).echo()
+            conf_echo = str(conf_echo)
             
-            if (conf_echo = "1"):
+            if (conf_echo == "1"):
                 print("Loop >")
                 await self._send_echo()
                 await asyncio.sleep(5)
